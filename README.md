@@ -95,7 +95,7 @@ explain the project for resume
 - Is there a link to which form of reporting is responded to quickest and slowest?
 
 ### Target variable
-- Level of Delay
+- 'level_of_delay'
     - Made in the feature engineering step.
 
 </details>
