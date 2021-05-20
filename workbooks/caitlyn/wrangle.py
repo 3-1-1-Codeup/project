@@ -85,6 +85,7 @@ def create_delay_columns(df):
 
 #-----------------------------------------------------------------------------
 
+# merge different values that are correlated together
 def clean_reason(df):
     '''
     This function will take in the service call df and replace the content of REASONNAME column with condensed names
@@ -93,36 +94,37 @@ def clean_reason(df):
     df['REASONNAME'] = df['REASONNAME'].replace(['Waste Collection', 'Solid Waste', 'Brush'], 'waste')
     # replace with code
     df['REASONNAME'] = df['REASONNAME'].replace(['Code Enforcement', 'Code Enforcement (Internal)', 'Code Enforcement (IntExp)'], 'code')
-    # replace with
+    # replace with field
     df['REASONNAME'] = df['REASONNAME'].replace(['Field Operations', 'Vector'], 'field')
-    # replace with
+    # replace with misc
     df['REASONNAME'] = df['REASONNAME'].replace('Miscellaneous', 'misc')
-    # replace with
+    # replace with traffic
     df['REASONNAME'] = df['REASONNAME'].replace(['Traffic Operations', 'Traffic Engineering Design', 'Traffic Issue Investigation'], 'traffic')
-    # replace with
+    # replace with streets
     df['REASONNAME'] = df['REASONNAME'].replace(['Streets', 'Signals', 'Signs and Markings'], 'streets')
-    # replace with
+    # replace with trades
     df['REASONNAME'] = df['REASONNAME'].replace('Trades', 'trades')
-    # replace with
+    # replace with storm
     df['REASONNAME'] = df['REASONNAME'].replace(['Stormwater', 'Storm Water', 'Storm Water Engineering'], 'storm')
-    # replace with
+    # replace with business
     df['REASONNAME'] = df['REASONNAME'].replace(['Small Business', 'Food Establishments', 'Shops (Internal)', 'Shops'], 'business')
-    # replace with
+    # replace with workforce
     df['REASONNAME'] = df['REASONNAME'].replace('Workforce Development', 'workforce')
-    # replace with
+    # replace with customer_service
     df['REASONNAME'] = df['REASONNAME'].replace(['Customer Service', '311 Call Center', 'Director\'s Office Horizontal'], 'customer_service')
-    # replace with
+    # replace with land
     df['REASONNAME'] = df['REASONNAME'].replace(['Land Development', 'Clean and Green', 'Urban Forestry', 'Natural Resources', 'Park Projects', 'Tree Crew', 'District 2', 'Clean and Green Natural Areas'], 'land')
-    # replace with
+    # replace with license
     df['REASONNAME'] = df['REASONNAME'].replace('Facility License', 'license')
-    # replace with
+    # replace with buildings
     df['REASONNAME'] = df['REASONNAME'].replace(['Dangerous Premise','Historic Preservation', 'Engineering Division'], 'buildings')
-    # replace with
+    # replace with cleanup
     df['REASONNAME'] = df['REASONNAME'].replace(['Graffiti (IntExp)', 'General Sanitation', 'Graffiti'], 'cleanup')
-    # replace with
+    # replace with waste
     df['REASONNAME'] = df['REASONNAME'].replace(['Waste Collection', 'Solid Waste'], 'waste')
-    # replace with
+    # replace with 
     df['REASONNAME'] = df['REASONNAME'].replace(['Waste Collection', 'Solid Waste'], 'waste')
+    # return df
     return df
 
 #-----------------------------------------------------------------------------
