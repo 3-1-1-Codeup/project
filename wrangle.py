@@ -4,6 +4,17 @@ from sklearn.model_selection import train_test_split
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
+#-----------------------------------------------------------------------------
+
+def get_311_data():
+    '''
+    This function uses pandas read .csv to read in the downloaded .csv 
+    from: https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+    after the .csv is read in, it returns it as a data frame.
+    '''
+    df= pd.read_csv('service_calls.csv')
+    return df
 #-----------------------------------------------------------------------------
 
 # Set the index
