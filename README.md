@@ -170,6 +170,10 @@ explain the project for resume
 | latitude | The Y coordinate of the case reported. (longitude) | float64 |
 | report_start_date | The start date range for the case open date for this extract file. | object |
 | report_end_date | The end date range for the case open date for this extract file. | object |
+| days_open | The number of days between a case being opened and closed. | float64 |
+| resolution_days_due | The number of days between a case being opened and due. | float64 |
+| days_before_or_after_due | How long before or after the due date were the cases closed | float64 |
+| level_of_delay |Level of delay based on days_before_or_after_due | object |
   
     
 \*  Indicates the target feature in this Zillow data.
