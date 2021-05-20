@@ -55,7 +55,7 @@ def scale_data(X_train, X_validate, X_test):
     '''
     
     
-    obj_col = ['fips', 'yearbuilt', 'airconditioningdesc', 'heatingorsystemdesc', 'bath_bed_ratio']
+    obj_col = ['category', 'open_date', 'due_date', 'closed_date', 'is_late', 'dept', 'call_reason', 'case_type', 'case_status', 'source_id', 'address', 'report_start_date', 'report_end_date', 'zipcode']
     num_train = X_train.drop(columns = obj_col)
     num_validate = X_validate.drop(columns = obj_col)
     num_test = X_test.drop(columns = obj_col)
