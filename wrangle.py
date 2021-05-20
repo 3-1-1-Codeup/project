@@ -160,3 +160,21 @@ def clean_311(df):
     df = clean_column_names(df)
     # return df
     return df
+
+#-----------------------------------------------------------------------------
+
+def split_separate_scale(df, stratify_by= None):
+    '''
+    This function will take in a dataframe
+    seperate the dataframe into train, validate, and test dataframes
+    seperate the target variable from train, validate and test
+    then it will scale the numeric variables in train, validate, and test
+    finally it will return all dataframes individually
+    '''
+    # split data into train, validate, test
+    train, validate, test = split(df, random_state= 123, stratify_by= None)
+     # seperate target variable
+    X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
+    # scale numeric variable
+    train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
