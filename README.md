@@ -16,7 +16,7 @@ ___
 
 
 ## <a name="project_description"></a> Project Description
-![desc](URL to photo)
+![desc](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/desc.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -43,7 +43,7 @@ explain the project for resume
     
     
 ## <a name="planning"></a> Project Planning
-![plan](URl to photo)
+![plan](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/plan.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -102,7 +102,7 @@ explain the project for resume
 
     
 ## <a name="findings"></a> Key Findings
-![find](URL to photo)
+![find](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/findings.png?raw=true)
 
 [[Back to top](#top)]
 
@@ -142,7 +142,7 @@ explain the project for resume
 </details>
 
 ## <a name="dictionary"></a> Data Dictionary
-![dict](URL to photo)
+![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/dict.png?raw=true)
 
 [[Back to top](#top)]
 
@@ -182,7 +182,7 @@ explain the project for resume
 </details>
 
 ## <a name="acquire_and_prep"></a> Acquire and Prepare Data
-![acquire_prep](URL to photo)
+![acquire_prep](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/a&c.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -201,7 +201,7 @@ explain the project for resume
 
 
 ## <a name="explore"></a> Exploration
-![dict](URL to photo)
+![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/explore.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -217,7 +217,7 @@ explain the project for resume
 </details>    
 
 ## <a name="stats"></a> Statistical Testing
-![stats](URL to photo)
+![stats](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/stats.png?raw=true)
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
@@ -287,7 +287,7 @@ explain the project for resume
 </details>    
 
 ## <a name="model"></a> Modeling
-![model](URL to photo)
+![model](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/model.png?raw=true)
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
@@ -333,7 +333,7 @@ Model Accuracy:
 </details>  
 
 ## <a name="conclusion"></a> Conclusion
-![conclusion](URL to photo)
+![conclusion](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/conc.png?raw=true)
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
@@ -349,7 +349,7 @@ I recommend...
 
 
 ## <a name="Recreate This Project"></a> Recreate the Project
-![recreate](URL to Photo)
+![recreate](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/recreate.png?raw=true)
 [[Back to top](#top)]
 
 <details>
