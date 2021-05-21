@@ -91,6 +91,7 @@ def create_delay_columns(df):
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
+    df.dropna(subset=['zipcode'], how='all', inplace=True)
     # return new df
     return df
 
