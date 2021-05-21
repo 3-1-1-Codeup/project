@@ -159,7 +159,6 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')
     return df
 
 #-----------------------------------------------------------------------------
@@ -184,6 +183,7 @@ def clean_311(df):
 
 #-----------------------------------------------------------------------------
 
+
 def split_separate_scale(df, stratify_by= None):
     '''
     This function will take in a dataframe
@@ -193,9 +193,38 @@ def split_separate_scale(df, stratify_by= None):
     finally it will return all dataframes individually
     '''
     # split data into train, validate, test
-    train, validate, test = split(df, random_state= 123, stratify_by= None)
-     # seperate target variable
-    X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
+     train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify= None)
+    train, validate = train_test_split(train_validate, 
+                                       test_size=.3, 
+                                       random_state=123, 
+                                       stratify= None)
+    
+    # split train into X (dataframe, drop target) & y (series, keep target only)
+    X_train = train.drop(columns=['days_before_or_after_due'])
+    y_train = train['days_before_or_after_due']
+    
+    # split validate into X (dataframe, drop target) & y (series, keep target only)
+    X_validate = validate.drop(columns=['days_before_or_after_due'])
+    y_validate = validate['days_before_or_after_due']
+    
+    # split test into X (dataframe, drop target) & y (series, keep target only)
+    X_test = test.drop(columns=['days_before_or_after_due'])
+    y_test = test['days_before_or_after_due']
+    
     # scale numeric variable
-    train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
-    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
+    scaler = sklearn.preprocessing.StandardScaler()
+    scaler.fit(x_train)
+
+    x_train_scaled = scaler.transform(x_train)
+    x_validate_scaled = scaler.transform(x_validate)
+    x_test_scaled = scaler.transform(x_test)
+    
+    # Make y_values separate dataframes
+    y_train = pd.DataFrame(y_train)
+    y_validate = pd.DataFrame(y_validate)
+    y_test = pd.DataFrame(y_test)
+    
+    #Unscaled data for later
+    X_unscaled= pd.DataFrame(scaler.inverse_transform(X_test), columns=X_test.columns)
+    
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled, X_uncaled
