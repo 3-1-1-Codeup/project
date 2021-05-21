@@ -150,7 +150,7 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}(\-\d{4})?)$')
+    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')
     return df
 
 #-----------------------------------------------------------------------------
