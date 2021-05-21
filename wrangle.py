@@ -1,8 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-
+import sklearn.preprocessing
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -189,44 +188,44 @@ def clean_311(df):
 def split_separate_scale(df, stratify_by= None):
     '''
     This function will take in a dataframe
-    seperate the dataframe into train, validate, and test dataframes
-    seperate the target variable from train, validate and test
+    separate the dataframe into train, validate, and test dataframes
+    separate the target variable from train, validate and test
     then it will scale the numeric variables in train, validate, and test
     finally it will return all dataframes individually
     '''
     # split data into train, validate, test
     train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify= None)
-    train, validate = train_test_split(train_validate, 
-                                       test_size=.3, 
-                                       random_state=123, 
-                                       stratify= None)
+    train, validate = train_test_split(train_validate, test_size=.3, random_state=123, stratify= None)
     
     # split train into X (dataframe, drop target) & y (series, keep target only)
-    X_train = train.drop(columns=['days_before_or_after_due'])
-    y_train = train['days_before_or_after_due']
+    X_train = train.drop(columns=['level_of_delay'])
+    y_train = train['level_of_delay']
     
     # split validate into X (dataframe, drop target) & y (series, keep target only)
-    X_validate = validate.drop(columns=['days_before_or_after_due'])
-    y_validate = validate['days_before_or_after_due']
+    X_validate = validate.drop(columns=['level_of_delay'])
+    y_validate = validate['level_of_delay']
     
     # split test into X (dataframe, drop target) & y (series, keep target only)
-    X_test = test.drop(columns=['days_before_or_after_due'])
-    y_test = test['days_before_or_after_due']
+    X_test = test.drop(columns=['level_of_delay'])
+    y_test = test['level_of_delay']
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
+  #-----------------------------------------------------------------------------  
     
+def scale_the_data(X_train, X_validate, X_test):
+    '''
+    This function takes in the split x variables and scales the data using the
+    standard scaler.
+    '''
     # scale numeric variable
+    from sklearn.preprocessing import StandardScaler
     scaler = sklearn.preprocessing.StandardScaler()
-    scaler.fit(x_train)
+    scaler.fit(X_train)
 
-    x_train_scaled = scaler.transform(x_train)
-    x_validate_scaled = scaler.transform(x_validate)
-    x_test_scaled = scaler.transform(x_test)
-    
-    # Make y_values separate dataframes
-    y_train = pd.DataFrame(y_train)
-    y_validate = pd.DataFrame(y_validate)
-    y_test = pd.DataFrame(y_test)
+    X_train_scaled = scaler.transform(X_train)
+    X_validate_scaled = scaler.transform(X_validate)
+    X_test_scaled = scaler.transform(X_test)
     
     #Unscaled data for later
     X_unscaled= pd.DataFrame(scaler.inverse_transform(X_test), columns=X_test.columns)
     
-    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled, X_uncaled
+    return X_train_scaled, X_validate_scaled, X_test_scaled, X_unscaled
