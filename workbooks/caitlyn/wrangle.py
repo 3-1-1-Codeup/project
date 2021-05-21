@@ -76,10 +76,9 @@ def create_delay_columns(df):
                                 labels = ['Extremely Late Response', 'Very Late Response', 
                                           'Late Response', "On Time Response", "Early Response", 
                                           'Very Early Response', 'Extremely Early Response'])
-    # add a new category for level of delay
-    df["level_of_delay"] = df['level_of_delay'].cat.add_categories('Still Open')
-    # replace nulls in level of delay with the new "Still Open" category
-    df["level_of_delay"].fillna("Still Open", inplace=True)
+    # drop nulls in these columns
+    df.dropna(subset=['days_open'], how='all', inplace=True)
+    df.dropna(subset=['level_of_delay'], how='all', inplace=True)
     # return new df
     return df
 
