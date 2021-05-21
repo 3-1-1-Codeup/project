@@ -1,9 +1,20 @@
 import pandas as pd
 import numpy as np
-
+from sklearn.model_selection import train_test_split
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
+#-----------------------------------------------------------------------------
+
+def get_311_data():
+    '''
+    This function uses pandas read .csv to read in the downloaded .csv 
+    from: https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+    after the .csv is read in, it returns it as a data frame.
+    '''
+    df= pd.read_csv('service_calls.csv')
+    return df
 #-----------------------------------------------------------------------------
 
 # Set the index
@@ -84,7 +95,15 @@ def create_delay_columns(df):
 
 #-----------------------------------------------------------------------------
 
-# merge different values that are correlated together
+def handle_outliers(df):
+    '''removes outiers from df'''
+    # remove outliers from days_open
+    df = df[df.days_open < 1400]
+    # return df
+    return df
+
+#-----------------------------------------------------------------------------
+
 def clean_reason(df):
     '''
     This function will take in the service call df and replace the content of REASONNAME column with condensed names
@@ -93,37 +112,36 @@ def clean_reason(df):
     df['REASONNAME'] = df['REASONNAME'].replace(['Waste Collection', 'Solid Waste', 'Brush'], 'waste')
     # replace with code
     df['REASONNAME'] = df['REASONNAME'].replace(['Code Enforcement', 'Code Enforcement (Internal)', 'Code Enforcement (IntExp)'], 'code')
-    # replace with field
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Field Operations', 'Vector'], 'field')
-    # replace with misc
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace('Miscellaneous', 'misc')
-    # replace with traffic
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Traffic Operations', 'Traffic Engineering Design', 'Traffic Issue Investigation'], 'traffic')
-    # replace with streets
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Streets', 'Signals', 'Signs and Markings'], 'streets')
-    # replace with trades
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace('Trades', 'trades')
-    # replace with storm
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Stormwater', 'Storm Water', 'Storm Water Engineering'], 'storm')
-    # replace with business
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Small Business', 'Food Establishments', 'Shops (Internal)', 'Shops'], 'business')
-    # replace with workforce
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace('Workforce Development', 'workforce')
-    # replace with customer_service
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Customer Service', '311 Call Center', 'Director\'s Office Horizontal'], 'customer_service')
-    # replace with land
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Land Development', 'Clean and Green', 'Urban Forestry', 'Natural Resources', 'Park Projects', 'Tree Crew', 'District 2', 'Clean and Green Natural Areas'], 'land')
-    # replace with license
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace('Facility License', 'license')
-    # replace with buildings
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Dangerous Premise','Historic Preservation', 'Engineering Division'], 'buildings')
-    # replace with cleanup
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Graffiti (IntExp)', 'General Sanitation', 'Graffiti'], 'cleanup')
-    # replace with waste
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Waste Collection', 'Solid Waste'], 'waste')
-    # replace with 
+    # replace with
     df['REASONNAME'] = df['REASONNAME'].replace(['Waste Collection', 'Solid Waste'], 'waste')
-    # return df
     return df
 
 #-----------------------------------------------------------------------------
@@ -141,7 +159,7 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'(\d{5}\-?\d{0,4})')
+    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')
     return df
 
 #-----------------------------------------------------------------------------
@@ -155,9 +173,29 @@ def clean_311(df):
     df = handle_nulls(df)
     # creating delay involved columns
     df = create_delay_columns(df)
+    # handle outliers
+    df = handle_outliers(df)
     # merge reasons
     df = clean_reason(df)
     # rename columns
     df = clean_column_names(df)
     # return df
     return df
+
+#-----------------------------------------------------------------------------
+
+def split_separate_scale(df, stratify_by= None):
+    '''
+    This function will take in a dataframe
+    seperate the dataframe into train, validate, and test dataframes
+    seperate the target variable from train, validate and test
+    then it will scale the numeric variables in train, validate, and test
+    finally it will return all dataframes individually
+    '''
+    # split data into train, validate, test
+    train, validate, test = split(df, random_state= 123, stratify_by= None)
+     # seperate target variable
+    X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
+    # scale numeric variable
+    train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
