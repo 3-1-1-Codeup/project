@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+import sklearn.preprocessing
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -104,6 +105,21 @@ def handle_outliers(df):
 
 #-----------------------------------------------------------------------------
 
+def create_dummies(df):
+    '''This function creates dummy variables for Council Districts'''
+    # set what we are going to create these dummies from
+    dummy_df =  pd.get_dummies(df['Council District'])
+    # Name the new columns
+    dummy_df.columns = ['district_0', 'district_1', 'district_2', 
+                        'district_3', 'district_4', 'district_5',
+                        'district_6', 'district_7', 'district_8',
+                        'district_9', 'district_10']
+    # add the dummies to the data frame
+    df = pd.concat([df, dummy_df], axis=1)
+    return df
+
+#-----------------------------------------------------------------------------
+
 def clean_reason(df):
     '''
     This function will take in the service call df and replace the content of REASONNAME column with condensed names
@@ -159,7 +175,6 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')
     return df
 
 #-----------------------------------------------------------------------------
@@ -175,6 +190,8 @@ def clean_311(df):
     df = create_delay_columns(df)
     # handle outliers
     df = handle_outliers(df)
+    # make dummies
+    df = create_dummies(df)
     # merge reasons
     df = clean_reason(df)
     # rename columns
@@ -184,18 +201,48 @@ def clean_311(df):
 
 #-----------------------------------------------------------------------------
 
+
 def split_separate_scale(df, stratify_by= None):
     '''
     This function will take in a dataframe
-    seperate the dataframe into train, validate, and test dataframes
-    seperate the target variable from train, validate and test
+    separate the dataframe into train, validate, and test dataframes
+    separate the target variable from train, validate and test
     then it will scale the numeric variables in train, validate, and test
     finally it will return all dataframes individually
     '''
     # split data into train, validate, test
-    train, validate, test = split(df, random_state= 123, stratify_by= None)
-     # seperate target variable
-    X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
+    train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify= None)
+    train, validate = train_test_split(train_validate, test_size=.3, random_state=123, stratify= None)
+    
+    # split train into X (dataframe, drop target) & y (series, keep target only)
+    X_train = train.drop(columns=['level_of_delay'])
+    y_train = train['level_of_delay']
+    
+    # split validate into X (dataframe, drop target) & y (series, keep target only)
+    X_validate = validate.drop(columns=['level_of_delay'])
+    y_validate = validate['level_of_delay']
+    
+    # split test into X (dataframe, drop target) & y (series, keep target only)
+    X_test = test.drop(columns=['level_of_delay'])
+    y_test = test['level_of_delay']
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
+  #-----------------------------------------------------------------------------  
+    
+# def scale_the_data(X_train, X_validate, X_test):
+  #  '''
+  #  This function takes in the split x variables and scales the data using the
+  #  standard scaler.
+   # '''
     # scale numeric variable
-    train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
-    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
+ #   from sklearn.preprocessing import StandardScaler
+ #   scaler = sklearn.preprocessing.StandardScaler()
+ #   scaler.fit(X_train)
+
+ #   X_train_scaled = scaler.transform(X_train)
+ #   X_validate_scaled = scaler.transform(X_validate)
+ #   X_test_scaled = scaler.transform(X_test)
+    
+    #Unscaled data for later
+  #  X_unscaled= pd.DataFrame(scaler.inverse_transform(X_test), columns=X_test.columns)
+    
+  #  return X_train_scaled, X_validate_scaled, X_test_scaled, X_unscaled
