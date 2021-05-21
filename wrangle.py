@@ -193,7 +193,7 @@ def split_separate_scale(df, stratify_by= None):
     finally it will return all dataframes individually
     '''
     # split data into train, validate, test
-     train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify= None)
+    train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify= None)
     train, validate = train_test_split(train_validate, 
                                        test_size=.3, 
                                        random_state=123, 
