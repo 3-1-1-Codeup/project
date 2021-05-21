@@ -4,6 +4,17 @@ from sklearn.model_selection import train_test_split
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
+#-----------------------------------------------------------------------------
+
+def get_311_data():
+    '''
+    This function uses pandas read .csv to read in the downloaded .csv 
+    from: https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+    after the .csv is read in, it returns it as a data frame.
+    '''
+    df= pd.read_csv('service_calls.csv')
+    return df
 #-----------------------------------------------------------------------------
 
 # Set the index
@@ -76,10 +87,9 @@ def create_delay_columns(df):
                                 labels = ['Extremely Late Response', 'Very Late Response', 
                                           'Late Response', "On Time Response", "Early Response", 
                                           'Very Early Response', 'Extremely Early Response'])
-    # add a new category for level of delay
-    df["level_of_delay"] = df['level_of_delay'].cat.add_categories('Still Open')
-    # replace nulls in level of delay with the new "Still Open" category
-    df["level_of_delay"].fillna("Still Open", inplace=True)
+    # drop nulls in these columns
+    df.dropna(subset=['days_open'], how='all', inplace=True)
+    df.dropna(subset=['level_of_delay'], how='all', inplace=True)
     # return new df
     return df
 
@@ -140,7 +150,7 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'(\d{5}\-?\d{0,4})')
+    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')
     return df
 
 #-----------------------------------------------------------------------------
