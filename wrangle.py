@@ -211,21 +211,21 @@ def split_separate_scale(df, stratify_by= None):
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
   #-----------------------------------------------------------------------------  
     
-def scale_the_data(X_train, X_validate, X_test):
-    '''
-    This function takes in the split x variables and scales the data using the
-    standard scaler.
-    '''
+# def scale_the_data(X_train, X_validate, X_test):
+  #  '''
+  #  This function takes in the split x variables and scales the data using the
+  #  standard scaler.
+   # '''
     # scale numeric variable
-    from sklearn.preprocessing import StandardScaler
-    scaler = sklearn.preprocessing.StandardScaler()
-    scaler.fit(X_train)
+ #   from sklearn.preprocessing import StandardScaler
+ #   scaler = sklearn.preprocessing.StandardScaler()
+ #   scaler.fit(X_train)
 
-    X_train_scaled = scaler.transform(X_train)
-    X_validate_scaled = scaler.transform(X_validate)
-    X_test_scaled = scaler.transform(X_test)
+ #   X_train_scaled = scaler.transform(X_train)
+ #   X_validate_scaled = scaler.transform(X_validate)
+ #   X_test_scaled = scaler.transform(X_test)
     
     #Unscaled data for later
-    X_unscaled= pd.DataFrame(scaler.inverse_transform(X_test), columns=X_test.columns)
+  #  X_unscaled= pd.DataFrame(scaler.inverse_transform(X_test), columns=X_test.columns)
     
-    return X_train_scaled, X_validate_scaled, X_test_scaled, X_unscaled
+  #  return X_train_scaled, X_validate_scaled, X_test_scaled, X_unscaled
