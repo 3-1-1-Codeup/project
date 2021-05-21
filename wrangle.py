@@ -105,6 +105,21 @@ def handle_outliers(df):
 
 #-----------------------------------------------------------------------------
 
+def create_dummies(df):
+    '''This function creates dummy variables for Council Districts'''
+    # set what we are going to create these dummies from
+    dummy_df =  pd.get_dummies(df['Council District'])
+    # Name the new columns
+    dummy_df.columns = ['district_0', 'district_1', 'district_2', 
+                        'district_3', 'district_4', 'district_5',
+                        'district_6', 'district_7', 'district_8',
+                        'district_9', 'district_10']
+    # add the dummies to the data frame
+    df = pd.concat([df, dummy_df], axis=1)
+    return df
+
+#-----------------------------------------------------------------------------
+
 def clean_reason(df):
     '''
     This function will take in the service call df and replace the content of REASONNAME column with condensed names
@@ -175,6 +190,8 @@ def clean_311(df):
     df = create_delay_columns(df)
     # handle outliers
     df = handle_outliers(df)
+    # make dummies
+    df = create_dummies(df)
     # merge reasons
     df = clean_reason(df)
     # rename columns
