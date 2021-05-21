@@ -175,6 +175,7 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
+    df['zipcode'] = df['address'].str.extract(r'(\d{5}\-?\d{0,4})')                 
     return df
 
 #-----------------------------------------------------------------------------
@@ -196,11 +197,76 @@ def clean_311(df):
     df = clean_reason(df)
     # rename columns
     df = clean_column_names(df)
+    df.to_csv('clean_311.csv')
     # return df
     return df
 
-#-----------------------------------------------------------------------------
 
+# Train/Split the data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+def split(df, stratify_by= None):
+    """
+    Crude train, validate, test split
+    To stratify, send in a column name
+    """
+    if stratify_by == None:
+        train, test = train_test_split(df, test_size=.2, random_state=319)
+        train, validate = train_test_split(train, test_size=.3, random_state=319)
+    else:
+        train, test = train_test_split(df, test_size=.2, random_state=319, stratify=df[stratify_by])
+        train, validate = train_test_split(train, test_size=.3, random_state=319, stratify=train[stratify_by])
+    return train, validate, test
+
+# Create X_train, y_train, etc...~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+def separate_y(train, validate, test):
+    '''
+    This function will take the train, validate, and test dataframes and separate the target variable into its
+    own panda series
+    '''
+    
+    X_train = train.drop(columns=['level_of_delay'])
+    y_train = train.level_of_delay
+    X_validate = validate.drop(columns=['level_of_delay'])
+    y_validate = validate.level_of_delay
+    X_test = test.drop(columns=['level_of_delay'])
+    y_test = test.level_of_delay
+    return X_train, y_train, X_validate, y_validate, X_test, y_test
+
+# Scale the data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+def scale_data(X_train, X_validate, X_test):
+    '''
+    This function will scale numeric data using Min Max transform after 
+    it has already been split into train, validate, and test.
+    '''
+    
+    
+    obj_col = ['open_date', 'due_date', 'closed_date', 'is_late', 'dept', 'call_reason', 'case_type', 'case_status', 'source_id', 'address', 'zipcode']
+    num_train = X_train.drop(columns = obj_col)
+    num_validate = X_validate.drop(columns = obj_col)
+    num_test = X_test.drop(columns = obj_col)
+    
+    
+    # Make the thing
+    scaler = sklearn.preprocessing.MinMaxScaler()
+    
+   
+    # we only .fit on the training data
+    scaler.fit(num_train)
+    train_scaled = scaler.transform(num_train)
+    validate_scaled = scaler.transform(num_validate)
+    test_scaled = scaler.transform(num_test)
+    
+    # turn the numpy arrays into dataframes
+    train_scaled = pd.DataFrame(train_scaled, columns=num_train.columns)
+    validate_scaled = pd.DataFrame(validate_scaled, columns=num_train.columns)
+    test_scaled = pd.DataFrame(test_scaled, columns=num_train.columns)
+    
+    
+    return train_scaled, validate_scaled, test_scaled
+
+# Combo Train & Scale Function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def split_separate_scale(df, stratify_by= None):
     '''
@@ -210,39 +276,15 @@ def split_separate_scale(df, stratify_by= None):
     then it will scale the numeric variables in train, validate, and test
     finally it will return all dataframes individually
     '''
+    
     # split data into train, validate, test
-    train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify= None)
-    train, validate = train_test_split(train_validate, test_size=.3, random_state=123, stratify= None)
+    train, validate, test = split(df, stratify_by= None)
     
-    # split train into X (dataframe, drop target) & y (series, keep target only)
-    X_train = train.drop(columns=['level_of_delay'])
-    y_train = train['level_of_delay']
+     # seperate target variable
+    X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
     
-    # split validate into X (dataframe, drop target) & y (series, keep target only)
-    X_validate = validate.drop(columns=['level_of_delay'])
-    y_validate = validate['level_of_delay']
     
-    # split test into X (dataframe, drop target) & y (series, keep target only)
-    X_test = test.drop(columns=['level_of_delay'])
-    y_test = test['level_of_delay']
-    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
-  #-----------------------------------------------------------------------------  
-    
-# def scale_the_data(X_train, X_validate, X_test):
-  #  '''
-  #  This function takes in the split x variables and scales the data using the
-  #  standard scaler.
-   # '''
     # scale numeric variable
- #   from sklearn.preprocessing import StandardScaler
- #   scaler = sklearn.preprocessing.StandardScaler()
- #   scaler.fit(X_train)
-
- #   X_train_scaled = scaler.transform(X_train)
- #   X_validate_scaled = scaler.transform(X_validate)
- #   X_test_scaled = scaler.transform(X_test)
+    train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
     
-    #Unscaled data for later
-  #  X_unscaled= pd.DataFrame(scaler.inverse_transform(X_test), columns=X_test.columns)
-    
-  #  return X_train_scaled, X_validate_scaled, X_test_scaled, X_unscaled
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
