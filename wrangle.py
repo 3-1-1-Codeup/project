@@ -174,7 +174,7 @@ def clean_311(df):
     # creating delay involved columns
     df = create_delay_columns(df)
     # handle outliers
-    handle_outliers(df)
+    df = handle_outliers(df)
     # merge reasons
     df = clean_reason(df)
     # rename columns
