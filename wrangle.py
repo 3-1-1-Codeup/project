@@ -95,6 +95,15 @@ def create_delay_columns(df):
 
 #-----------------------------------------------------------------------------
 
+def handle_outliers(df):
+    '''removes outiers from df'''
+    # remove outliers from days_open
+    df = df[df.days_open < 1400]
+    # return df
+    return df
+
+#-----------------------------------------------------------------------------
+
 def clean_reason(df):
     '''
     This function will take in the service call df and replace the content of REASONNAME column with condensed names
@@ -164,6 +173,8 @@ def clean_311(df):
     df = handle_nulls(df)
     # creating delay involved columns
     df = create_delay_columns(df)
+    # handle outliers
+    handle_outliers(df)
     # merge reasons
     df = clean_reason(df)
     # rename columns
