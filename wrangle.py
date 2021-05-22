@@ -91,7 +91,7 @@ def create_delay_columns(df):
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
-    df.dropna(subset=['zipcode'], how='all', inplace=True)
+    
     # return new df
     return df
 
@@ -176,7 +176,9 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')                 
+    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')  
+    #drop zipcode nulls after obtaining zipcode
+    df.dropna(subset=['zipcode'], how='all', inplace=True)         
     return df
 
 #-----------------------------------------------------------------------------
