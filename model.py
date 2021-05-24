@@ -12,7 +12,7 @@ from sklearn import preprocessing
 
 # Model Prep
 
-def dummy_dept(df)
+def dummy_dept(df):
     # dummy dept feature
     dummy_df =  pd.get_dummies(df['dept'])
     # Name the new columns
