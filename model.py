@@ -50,7 +50,7 @@ def make_source_id_dummies(df):
 
 #-------------------------------
 def keep_info(df):
-    df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay'
+    df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay',
                                    'council_district', 'resolution_days_due']), 1, inplace=True)
     return df
 
