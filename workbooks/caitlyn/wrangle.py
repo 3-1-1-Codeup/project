@@ -33,7 +33,7 @@ def drop_and_index(df):
                  'Report Starting Date', 
                  'Report Ending Date' ], inplace=True)
     # Set index to case id
-    df.set_index('CASEID')
+    df.set_index('CASEID', inplace=True)
     return df
 
 #-----------------------------------------------------------------------------
