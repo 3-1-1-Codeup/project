@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 get_ipython().run_line_magic('matplotlib', 'inline')
 
-#~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_dbad_relplot(train):
     plt.figure(figsize=(20, 10))
     sns.relplot(x='case_id', y='days_before_or_after_due', col= 'source_id', hue='dept', data=train)
@@ -21,9 +21,49 @@ def make_dbad_relplot(train):
     plt.suptitle('Evaluating number of days early or late per call type')
     return plt.show()
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def make_avg_days_by_dept(train):
+    plt.figure(figsize=(20, 10))
+    sns.relplot(x='case_id', y='days_open', col= 'dept', hue='is_late', data=train)
+    plt.xlabel("Case ID")
+    plt.ylabel("Days early or late")
+    plt.subplots_adjust(top=0.85)
+    plt.suptitle('Evaluating average number of days open by dept')
+    return plt.show()
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def make_isLate(train):
+    plt.figure(figsize=(20, 10))
+    sns.stripplot(x="dept", y="case_id", hue='is_late', data=train, jitter=0.05)
+    plt.xlabel("Department")
+    plt.ylabel("Case ID")
+    plt.suptitle('Evaluating is late by department')
+    return plt.show()
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def get_first_anova_test(train):
+    n = train.shape[0]     # number of observations
+    degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
+    conf_interval = .95 # desired confidence interval
+    α = 1 - conf_interval
+    null_hypothesis = 'there is no difference in mean days open between the departments.'
+    F, p = stats.f_oneway( 
+        train.days_open[train.dept== "Solid Waste Management"],
+        train.days_open[train.dept== "Development Services"],
+        train.days_open[train.dept== "Animal Care Services"],
+        train.days_open[train.dept== "Unknown"],
+        train.days_open[train.dept== "Trans & Cap Improvements"],
+        train.days_open[train.dept== "Metro Health"],
+        train.days_open[train.dept== "Code Enforcement Services"], 
+        train.days_open[train.dept== "Customer Service"], 
+        train.days_open[train.dept== "Parks and Recreation"]
+        )
+    if p > α:
+        return print("We fail to reject the null hypothesis. The null hypothesis is that", null_hypothesis)
+    else:
+        return print("We reject the null hypothesis that", null_hypothesis)
+    
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 def get_chi_square(train):
@@ -47,10 +87,9 @@ def get_chi_square(train):
         return print("We reject the null hypothesis that", null_hypothesis)
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-def get_anova_test(train):
+def get_second_anova_test(train):
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
@@ -75,8 +114,4 @@ def get_anova_test(train):
         return print("We reject the null hypothesis that", null_hypothesis)
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
