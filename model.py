@@ -9,7 +9,11 @@ from sklearn.linear_model import SGDClassifier
 from sklearn import preprocessing
 
 #-----------------------------------------------------------------------------
-
+def keep_info(df):
+    df.drop(df.columns.difference(['dept','call_reason', 'source_id',
+                                   'council_district', 'resolution_days_due']), 1, inplace=True)
+    return df
+#-----------------------------------------------------------------------------
 # Model Prep
 
 def dummy_dept(df):
@@ -23,6 +27,7 @@ def dummy_dept(df):
                         'unknown_dept']
     # add the dummies to the data frame
     df = pd.concat([df, dummy_df], axis=1)
+    return df
 #-----------------------------------------------------------------------------    
 def dummy_call_reason(df):
     # dummy dept feature
@@ -36,9 +41,8 @@ def dummy_call_reason(df):
     df = pd.concat([df, dummy_df], axis=1)
     return df
 #-----------------------------------------------------------------------------
-    def make_source_id_dummies(df):
-    '''This function takes in the cleaned dataframe, makes dummy variables of the source id column, readds the names of the
-    dummy columns and returns the concatenated dummy dataframe to the original dataframe.'''
+def make_source_id_dummies(df):
+    '''This function takes in the cleaned dataframe, makes dummy variables of the source id column, readds the names of the dummy columns and returns the concatenated dummy dataframe to the original dataframe.'''
     #make dummies
     dummy_df = pd.get_dummies(df['source_id'])
     #add back column names
