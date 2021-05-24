@@ -23,7 +23,7 @@ def dummy_dept(df):
                         'unknown_dept']
     # add the dummies to the data frame
     df = pd.concat([df, dummy_df], axis=1)
-    
+#-----------------------------------------------------------------------------    
 def dummy_call_reason(df):
     # dummy dept feature
     dummy_df =  pd.get_dummies(df['call_reason'])
@@ -33,5 +33,17 @@ def dummy_call_reason(df):
                         'license', 'misc', 'storm', 'streets', 'trades', 
                         'traffic', 'waste']
     # add the dummies to the data frame
+    df = pd.concat([df, dummy_df], axis=1)
+    return df
+#-----------------------------------------------------------------------------
+    def make_source_id_dummies(df):
+    '''This function takes in the cleaned dataframe, makes dummy variables of the source id column, readds the names of the
+    dummy columns and returns the concatenated dummy dataframe to the original dataframe.'''
+    #make dummies
+    dummy_df = pd.get_dummies(df['source_id'])
+    #add back column names
+    dummy_df.columns = ['web_portal', '311_mobile_app', 
+                        'constituent_call', 'interal_services_requests']
+    # concatenate dummies to the cleaned data frame
     df = pd.concat([df, dummy_df], axis=1)
     return df
