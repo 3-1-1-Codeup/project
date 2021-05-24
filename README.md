@@ -15,8 +15,8 @@
 ___
 
 
-## <a name="project_description"></a> Project Description
-![desc](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/desc.png?raw=true)
+## <a name="project_description"></a>
+![desc](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/description.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -42,8 +42,8 @@ explain the project for resume
 </details>
     
     
-## <a name="planning"></a> Project Planning
-![plan](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/plan.png?raw=true)
+## <a name="planning"></a> 
+![plan](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/planning.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -101,8 +101,8 @@ explain the project for resume
 </details>
 
     
-## <a name="findings"></a> Key Findings
-![find](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/findings.png?raw=true)
+## <a name="findings"></a> 
+![find](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/findings.png?raw=true)
 
 [[Back to top](#top)]
 
@@ -141,7 +141,7 @@ explain the project for resume
     
 </details>
 
-## <a name="dictionary"></a> Data Dictionary
+## <a name="dictionary"></a>
 ![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/dict.png?raw=true)
 
 [[Back to top](#top)]
@@ -181,8 +181,8 @@ explain the project for resume
 ***
 </details>
 
-## <a name="acquire_and_prep"></a> Acquire and Prepare Data
-![acquire_prep](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/a&c.png?raw=true)
+## <a name="acquire_and_prep"></a> 
+![acquire_prep](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/acquire_prepare.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -200,7 +200,7 @@ explain the project for resume
 
 
 
-## <a name="explore"></a> Exploration
+## <a name="explore"></a> 
 ![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/explore.png?raw=true)
 [[Back to top](#top)]
 
@@ -216,7 +216,7 @@ explain the project for resume
 
 </details>    
 
-## <a name="stats"></a> Statistical Testing
+## <a name="stats"></a> 
 ![stats](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/stats.png?raw=true)
 [[Back to top](#top)]
 <details>
@@ -286,7 +286,7 @@ explain the project for resume
     
 </details>    
 
-## <a name="model"></a> Modeling
+## <a name="model"></a> 
 ![model](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/model.png?raw=true)
 [[Back to top](#top)]
 <details>
@@ -332,7 +332,7 @@ Model Accuracy:
 
 </details>  
 
-## <a name="conclusion"></a> Conclusion
+## <a name="conclusion"></a> 
 ![conclusion](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/conc.png?raw=true)
 [[Back to top](#top)]
 <details>
@@ -348,8 +348,8 @@ I recommend...
 </details>  
 
 
-## <a name="Recreate This Project"></a> Recreate the Project
-![recreate](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/recreate.png?raw=true)
+## <a name="Recreate This Project"></a> 
+![recreate](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/recreate.png?raw=true)
 [[Back to top](#top)]
 
 <details>
