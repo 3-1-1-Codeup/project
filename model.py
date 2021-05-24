@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import wrangle
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -51,7 +50,9 @@ def make_source_id_dummies(df):
 #-------------------------------
 def keep_info(df):
     df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay',
-                                   'council_district', 'resolution_days_due']), 1, inplace=True)
+                                   'council_district', 'resolution_days_due', 'district_0', 'district_1', 'district_2',
+                                   'district_3', 'district_4','district_5', 'district_6', 'district_7', 'district_8', 
+                                   'district_9','district_10']), 1, inplace=True)
     return df
 
 #--------------------------------
@@ -65,3 +66,72 @@ def model_df():
     df= make_source_id_dummies(df)
 
     return df
+
+#------------------------------------
+def separate_y(train, validate, test):
+    '''
+    This function will take the train, validate, and test dataframes and separate the target variable into its
+    own panda series
+    '''
+    
+    X_train = train.drop(columns=['level_of_delay'])
+    y_train = train.level_of_delay
+    X_validate = validate.drop(columns=['level_of_delay'])
+    y_validate = validate.level_of_delay
+    X_test = test.drop(columns=['level_of_delay'])
+    y_test = test.level_of_delay
+    return X_train, y_train, X_validate, y_validate, X_test, y_test
+#------------------------------------
+def scale_data(X_train, X_validate, X_test):
+    '''
+    This function will scale numeric data using Min Max transform after 
+    it has already been split into train, validate, and test.
+    '''
+    
+    
+    obj_col = ['dept', 'call_reason','source_id']
+    num_train = X_train.drop(columns = obj_col)
+    num_validate = X_validate.drop(columns = obj_col)
+    num_test = X_test.drop(columns = obj_col)
+    
+    
+    # Make the thing
+    scaler = sklearn.preprocessing.MinMaxScaler()
+    
+   
+    # we only .fit on the training data
+    scaler.fit(num_train)
+    train_scaled = scaler.transform(num_train)
+    validate_scaled = scaler.transform(num_validate)
+    test_scaled = scaler.transform(num_test)
+    
+    # turn the numpy arrays into dataframes
+    train_scaled = pd.DataFrame(train_scaled, columns=num_train.columns)
+    validate_scaled = pd.DataFrame(validate_scaled, columns=num_train.columns)
+    test_scaled = pd.DataFrame(test_scaled, columns=num_train.columns)
+    
+    
+    return train_scaled, validate_scaled, test_scaled
+
+#------------------------------------
+
+def split_separate_scale(df, stratify_by= 'level_of_delay'):
+    '''
+    This function will take in a dataframe
+    separate the dataframe into train, validate, and test dataframes
+    separate the target variable from train, validate and test
+    then it will scale the numeric variables in train, validate, and test
+    finally it will return all dataframes individually
+    '''
+    
+    # split data into train, validate, test
+    train, validate, test = split(df, stratify_by= 'level_of_delay')
+    
+     # seperate target variable
+    X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
+    
+    
+    # scale numeric variable
+    train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
+    
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
