@@ -1,5 +1,5 @@
 <a name="top"></a>
-![name of photo](url_to_photo)
+![name of photo](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/title.png?raw=true)
 
 ***
 [[Project Description](#project_description)]
