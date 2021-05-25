@@ -1,14 +1,14 @@
 import pandas as pd
 import numpy as np
 import wrangle
-
 from sklearn.model_selection import train_test_split
+import sklearn.preprocessing
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import SGDClassifier
-from sklearn import preprocessing
 
-#-----------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Model Prep
 
@@ -24,7 +24,8 @@ def dummy_dept(df):
     # add the dummies to the data frame
     df = pd.concat([df, dummy_df], axis=1)
     return df
-#-----------------------------------------------------------------------------    
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 def dummy_call_reason(df):
     # dummy dept feature
     dummy_df =  pd.get_dummies(df['call_reason'])
@@ -36,7 +37,8 @@ def dummy_call_reason(df):
     # add the dummies to the data frame
     df = pd.concat([df, dummy_df], axis=1)
     return df
-#-----------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def make_source_id_dummies(df):
     '''This function takes in the cleaned dataframe, makes dummy variables of the source id column, readds the names of the
     dummy columns and returns the concatenated dummy dataframe to the original dataframe.'''
@@ -48,7 +50,7 @@ def make_source_id_dummies(df):
     df = pd.concat([df, dummy_df], axis=1)
     return df
 
-#-------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def keep_info(df):
     df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay',
                                    'council_district', 'resolution_days_due', 'district_0', 'district_1', 'district_2',
@@ -56,7 +58,7 @@ def keep_info(df):
                                    'district_9','district_10']), 1, inplace=True)
     return df
 
-#--------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def model_df():
     '''This function reads in the clean 311 dataframe, applies all of the above functions to prepare it for modeling. 
     The function then returns a cleaned dataframe ready for modeling.'''
@@ -67,6 +69,7 @@ def model_df():
     df= make_source_id_dummies(df)
 
     return df
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 def split(df, stratify_by= 'level_of_delay'):
@@ -82,8 +85,9 @@ def split(df, stratify_by= 'level_of_delay'):
         train, validate = train_test_split(train, test_size=.3, random_state=319, stratify=train[stratify_by])
     return train, validate, test
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#------------------------------------
+
 def separate_y(train, validate, test):
     '''
     This function will take the train, validate, and test dataframes and separate the target variable into its
@@ -97,7 +101,7 @@ def separate_y(train, validate, test):
     X_test = test.drop(columns=['level_of_delay'])
     y_test = test.level_of_delay
     return X_train, y_train, X_validate, y_validate, X_test, y_test
-#------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def scale_data(X_train, X_validate, X_test):
     '''
     This function will scale numeric data using Min Max transform after 
@@ -129,9 +133,10 @@ def scale_data(X_train, X_validate, X_test):
     
     return train_scaled, validate_scaled, test_scaled
 
-#------------------------------------
 
-def split_separate_scale(df, stratify_by= 'level_of_delay'):
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+def split_separate_scale(df, stratify_by='level_of_delay'):
     '''
     This function will take in a dataframe
     separate the dataframe into train, validate, and test dataframes
