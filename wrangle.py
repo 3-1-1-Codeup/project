@@ -202,7 +202,7 @@ def first_iteration_clean_311(df):
     df = clean_reason(df)
     # rename columns
     df = clean_column_names(df)
-    df.to_csv('clean_311.csv')
+    df.to_csv('first_iteration_clean_311.csv')
     # return df
     return df
 
@@ -339,6 +339,20 @@ def find_voter_info(df):
     # create a new column and use np.select to assign values to it using our lists as arguments
     df['voter_turnout_2019'] = np.select(conditions, voter_turnout)
     df['num_of_registered_voters'] = np.select(conditions, registered_voters)
+    return df
+#------------------------------------------------------------------------------------------------------------------------------------------
+def add_per_cap_in(df):
+    '''
+    This function takes in the original cleaned dataframe and adds a per capita
+    income metric by council district
+    '''
+    # Creating a dictionary with per_capita values from city of San Antonio to convert to dataframe
+    per_cap_in = {1: 23967, 2: 19055, 3: 18281, 4: 18500, 5: 13836, 6: 23437, 7: 25263,
+                         8: 35475, 9: 42559, 10: 30240}
+    # Converting to dataframe
+    per_cap_in = pd.DataFrame(list(per_cap_in.items()),columns = ['council_district','per_capita_income'])
+    #Merging with the original dataframe
+    df = df.merge(per_cap_in, on = 'council_district', how ='left')
     return df
 #------------------------------------------------------------------------------------------------------------------------------------------
 # clean the whole df
