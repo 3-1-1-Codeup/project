@@ -79,6 +79,8 @@ def create_delay_columns(df):
     df['days_open'] = df.days_open // pd.Timedelta('1d')
     # Convert to string format insted of timedelta
     df['resolution_days_due'] = df.resolution_days_due // pd.Timedelta('1d')
+    # create new feature to show how long it took to resolve compared to resolution due date
+    df['days_before_or_after_due'] = df.resolution_days_due - df.days_open
     # replace null values in days open with 0
     df['days_open'] = df['days_open'].fillna(0)
     # add 1 to resolution days to offset future issues with upcoming feature
