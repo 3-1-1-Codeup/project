@@ -293,3 +293,25 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
     
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
+
+
+#-----------------------------------------------------------------------------
+
+def extract_time(df):
+    '''
+    This function will take in a dataframe and return it with new features extracted from the open_date column
+    - open_month: which month the case was opened in
+    - open_year: which year the case was opened in
+    - open_week: which week the case was opened in
+    '''
+    
+    # extract month from open_date
+    df['open_month'] = df.open_date.dt.month
+    
+    # extract year from open_date
+    df['open_year'] = df.open_date.dt.year
+    
+    # extract week from open_date
+    df['open_week'] = df.open_date.dt.week
+    
+    return df
