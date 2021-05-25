@@ -33,7 +33,7 @@ def drop_and_index(df):
                  'Report Starting Date', 
                  'Report Ending Date' ], inplace=True)
     # Set index to case id
-    df.set_index('CASEID')
+    df.set_index('CASEID', inplace=True)
     return df
 
 #-----------------------------------------------------------------------------
@@ -207,7 +207,7 @@ def clean_311(df):
 
 # Train/Split the data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def split(df, stratify_by= None):
+def split(df, stratify_by= 'level_of_delay'):
     """
     Crude train, validate, test split
     To stratify, send in a column name
@@ -271,7 +271,7 @@ def scale_data(X_train, X_validate, X_test):
 
 # Combo Train & Scale Function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def split_separate_scale(df, stratify_by= None):
+def split_separate_scale(df, stratify_by= 'level_of_delay'):
     '''
     This function will take in a dataframe
     separate the dataframe into train, validate, and test dataframes
@@ -281,7 +281,7 @@ def split_separate_scale(df, stratify_by= None):
     '''
     
     # split data into train, validate, test
-    train, validate, test = split(df, stratify_by= None)
+    train, validate, test = split(df, stratify_by= 'level_of_delay')
     
      # seperate target variable
     X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)

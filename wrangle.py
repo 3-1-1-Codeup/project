@@ -110,10 +110,12 @@ def handle_outliers(df):
 
 def create_dummies(df):
     '''This function creates dummy variables for Council Districts'''
+    # Drop district 0
+    df = df[df.council_district != 0]
     # set what we are going to create these dummies from
     dummy_df =  pd.get_dummies(df['Council District'])
     # Name the new columns
-    dummy_df.columns = ['district_0', 'district_1', 'district_2', 
+    dummy_df.columns = ['district_1', 'district_2', 
                         'district_3', 'district_4', 'district_5',
                         'district_6', 'district_7', 'district_8',
                         'district_9', 'district_10']
@@ -428,9 +430,6 @@ def clean_311(df):
     df= add_per_cap_in(df)
     #add per sqmiles info
     df= sq_miles_by_days(df)
-
-    #remove all council district 0 information
-    df = df[df.council_district != 0]
     #make clean csv with all changes
     df.to_csv('second_clean_311.csv')
     # return df
