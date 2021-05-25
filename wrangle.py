@@ -186,7 +186,7 @@ def clean_column_names(df):
 #-----------------------------------------------------------------------------
 
 # clean the whole df
-def clean_311(df):
+def first_iteration_clean_311(df):
     '''Takes in all previous funcitons to clean the whole df'''
     # Drop columns and set index
     df = drop_and_index(df)
@@ -339,4 +339,34 @@ def find_voter_info(df):
     # create a new column and use np.select to assign values to it using our lists as arguments
     df['voter_turnout_2019'] = np.select(conditions, voter_turnout)
     df['num_of_registered_voters'] = np.select(conditions, registered_voters)
+    return df
+#------------------------------------------------------------------------------------------------------------------------------------------
+# clean the whole df
+def clean_311(df):
+    '''Takes in all previous funcitons to clean the whole df'''
+    # Drop columns and set index
+    df = drop_and_index(df)
+    # hadle null values
+    df = handle_nulls(df)
+    # creating delay involved columns
+    df = create_delay_columns(df)
+    # handle outliers
+    df = handle_outliers(df)
+    # make dummies
+    df = create_dummies(df)
+    # merge reasons
+    df = clean_reason(df)
+    #add voter information
+    df= find_voter_info(df)
+    # rename columns
+    df = clean_column_names(df)
+    # add date/time information
+    df= extract_time(df)
+    #add per capita information
+    df= add_per_cap_in(df)
+    #remove all council district 0 information
+    df = df[df.council_district != 0]
+    #make clean csv with all changes
+    df.to_csv('second_clean_311.csv')
+    # return df
     return df
