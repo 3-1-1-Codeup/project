@@ -394,11 +394,10 @@ def clean_311(df):
     df= extract_time(df)
     #add per capita information
     df= add_per_cap_in(df)
-<<<<<<< HEAD
-=======
+
     #add per sqmiles info
     df = get_sq_miles(df)
->>>>>>> 509d6e3bba32667f3b79920b9a557800bef4521c
+
     #make clean csv with all changes
     df.to_csv('second_clean_311.csv')
     # return df
