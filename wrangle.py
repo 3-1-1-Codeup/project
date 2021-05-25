@@ -295,7 +295,7 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
 
 
-#-----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 
 def extract_time(df):
     '''
@@ -314,4 +314,29 @@ def extract_time(df):
     # extract week from open_date
     df['open_week'] = df.open_date.dt.week
     
+    return df
+    
+#------------------------------------------------------------------------------------------------------------------------------------------
+def find_voter_info(df):
+    '''This function reads in a dataframe. Using the Council District column, it appends the voter turn out and
+    number of registered voters for each district. It does NOT take into account district 0 due to that being a
+    filler district for outside jurisdictions. It then appends the info onto the dataframe and returns it for later use.'''
+    conditions = [
+    (df['Council District'] == 1),
+    (df['Council District'] == 2), 
+    (df['Council District'] == 3),
+    (df['Council District'] == 4),
+    (df['Council District'] == 5),
+    (df['Council District'] == 6),
+    (df['Council District'] == 7),
+    (df['Council District'] == 8),
+    (df['Council District'] == 9),
+    (df['Council District'] == 10)
+    ]
+    # create a list of the values we want to assign for each condition
+    voter_turnout = [0.148, 0.086, 0.111, 0.078, 0.085, 0.124, 0.154, 0.137, 0.185, 0.154]
+    registered_voters= [68081, 67656, 69022, 66370, 61418, 80007, 83287, 97717, 99309, 91378]
+    # create a new column and use np.select to assign values to it using our lists as arguments
+    df['voter_turnout_2019'] = np.select(conditions, voter_turnout)
+    df['num_of_registered_voters'] = np.select(conditions, registered_voters)
     return df
