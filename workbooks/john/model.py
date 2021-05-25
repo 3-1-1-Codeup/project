@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import wrangle
-
+import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -105,7 +105,7 @@ def scale_data(X_train, X_validate, X_test):
     '''
     
     
-    obj_col = ['dept', 'call_reason','source_id']
+    obj_col = []
     num_train = X_train.drop(columns = obj_col)
     num_validate = X_validate.drop(columns = obj_col)
     num_test = X_test.drop(columns = obj_col)
@@ -151,3 +151,25 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
     
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
+
+#------------------------------------
+
+def create_model_df(df):
+    
+    '''
+    This function will take in a cleaned dataframe and return a dataframe prepared for numeric based modeling
+    '''
+    
+    # only keep chosen variable
+    model_df = keep_info(df)
+    
+    # make dummies of chosen variables
+    model_df = dummy_dept(model_df)
+    model_df = make_source_id_dummies(model_df)
+    model_f = dummy_call_reason(model_df)
+    model_df = create_dummies(model_df)
+    
+    # drop categorical columns once they've been dummied
+    model_df = model_df.drop(columns = ['dept', 'call_reason', 'council_district', 'source_id'])
+    
+    return model_df
