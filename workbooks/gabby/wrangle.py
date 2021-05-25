@@ -33,7 +33,7 @@ def drop_and_index(df):
                  'Report Starting Date', 
                  'Report Ending Date' ], inplace=True)
     # Set index to case id
-    df.set_index('CASEID')
+    df.set_index('CASEID', inplace=True)
     return df
 
 #-----------------------------------------------------------------------------
@@ -91,6 +91,7 @@ def create_delay_columns(df):
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
+    
     # return new df
     return df
 
@@ -101,6 +102,21 @@ def handle_outliers(df):
     # remove outliers from days_open
     df = df[df.days_open < 1400]
     # return df
+    return df
+
+#-----------------------------------------------------------------------------
+
+def create_dummies(df):
+    '''This function creates dummy variables for Council Districts'''
+    # set what we are going to create these dummies from
+    dummy_df =  pd.get_dummies(df['Council District'])
+    # Name the new columns
+    dummy_df.columns = ['district_0', 'district_1', 'district_2', 
+                        'district_3', 'district_4', 'district_5',
+                        'district_6', 'district_7', 'district_8',
+                        'district_9', 'district_10']
+    # add the dummies to the data frame
+    df = pd.concat([df, dummy_df], axis=1)
     return df
 
 #-----------------------------------------------------------------------------
@@ -160,7 +176,9 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'(\d{5}\-?\d{0,4})')
+    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')  
+    #drop zipcode nulls after obtaining zipcode
+    df.dropna(subset=['zipcode'], how='all', inplace=True)         
     return df
 
 #-----------------------------------------------------------------------------
@@ -176,6 +194,8 @@ def clean_311(df):
     df = create_delay_columns(df)
     # handle outliers
     df = handle_outliers(df)
+    # make dummies
+    df = create_dummies(df)
     # merge reasons
     df = clean_reason(df)
     # rename columns
@@ -187,7 +207,7 @@ def clean_311(df):
 
 # Train/Split the data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def split(df, stratify_by= None):
+def split(df, stratify_by= 'level_of_delay'):
     """
     Crude train, validate, test split
     To stratify, send in a column name
@@ -251,7 +271,7 @@ def scale_data(X_train, X_validate, X_test):
 
 # Combo Train & Scale Function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def split_separate_scale(df, stratify_by= None):
+def split_separate_scale(df, stratify_by= 'level_of_delay'):
     '''
     This function will take in a dataframe
     separate the dataframe into train, validate, and test dataframes
@@ -261,7 +281,7 @@ def split_separate_scale(df, stratify_by= None):
     '''
     
     # split data into train, validate, test
-    train, validate, test = split(df, stratify_by= None)
+    train, validate, test = split(df, stratify_by= 'level_of_delay')
     
      # seperate target variable
     X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
