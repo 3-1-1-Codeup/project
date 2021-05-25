@@ -79,20 +79,22 @@ def create_delay_columns(df):
     df['days_open'] = df.days_open // pd.Timedelta('1d')
     # Convert to string format insted of timedelta
     df['resolution_days_due'] = df.resolution_days_due // pd.Timedelta('1d')
+    # replace null values in days open with 0
+    df['days_open'] = df['days_open'].fillna(0)
+    # add 1 to resolution days to offset future issues with upcoming feature
+    df['resolution_days_due'] = df['resolution_days_due'] + 1
     # create new feature to show how long it took to resolve compared to resolution due date
-    df['days_before_or_after_due'] = df.resolution_days_due - df.days_open
-        # postitive means before days before due data and negative means number of days after due
-    # bin how long it took compare to due date to get level of delay
-    df['level_of_delay'] = pd.cut(df.days_before_or_after_due, 
-                                bins = [-700,-500,-300,-100,0,100,300,500],
-                                labels = ['Extremely Late Response', 'Very Late Response', 
-                                          'Late Response', "On Time Response", "Early Response", 
-                                          'Very Early Response', 'Extremely Early Response'])
+    df['pct_time_of_used'] = df.days_open / df.resolution_days_due
+    # bin the new feature
+    df['level_of_delay'] = pd.cut(df.pct_time_of_used, 
+                            bins = [0.0,0.25,0.5,0.75,1.0,15,100,200],
+                            labels = ['Extremely Early Response', 'Very Early Response', 
+                                      'Early Response', "On Time Response", "Late Response", 
+                                      'Very Late Response', 'Extremely Late Response'])
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
-    
-    # return new df
+    # return df
     return df
 
 #-----------------------------------------------------------------------------
