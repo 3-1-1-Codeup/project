@@ -294,7 +294,55 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
 
-
+#------------------------------------------------------------------------------------------------------------------------------------------------
+def get_sq_miles(council_district):
+    """
+    This function will apply the square miles per district
+    to each district.
+    """
+    d1 = 26.00
+    d2 = 59.81
+    d3 = 116.15
+    d4 = 65.21
+    d5 = 22.24
+    d6 = 38.44
+    d7 = 32.82
+    d8 = 71.64
+    d9 = 48.71
+    d10 = 55.62
+    if council_district == 1:
+        return d1
+    elif council_district == 2:
+        return d2
+    elif council_district == 3:
+        return d3
+    elif council_district == 4:
+        return d4
+    elif council_district == 5:
+        return d5
+    elif council_district == 6:
+        return d6
+    elif council_district == 7:
+        return d7
+    elif council_district == 8:
+        return d8
+    elif council_district == 9:
+        return d9
+    else:
+        return d10
+def sq_miles_by_days(df):
+    """
+    This function takes in one positional argument:
+    1.  311 df
+    This function returns:
+    1. square mile per district
+    2. the amount of days before or after due per square mile
+    """
+    # get square miles for each district
+    df['sq_miles'] = df['council_district'].apply(get_sq_miles)
+    # get the amount of days per square mile
+    df['sq_miles_by_days'] = df.sq_miles / df.days_before_or_after_due
+    return df
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 
 def extract_time(df):
@@ -378,6 +426,9 @@ def clean_311(df):
     df= extract_time(df)
     #add per capita information
     df= add_per_cap_in(df)
+    #add per sqmiles info
+    df= sq_miles_by_days(df)
+
     #remove all council district 0 information
     df = df[df.council_district != 0]
     #make clean csv with all changes
