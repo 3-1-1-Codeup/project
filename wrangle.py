@@ -113,7 +113,7 @@ def handle_outliers(df):
 def create_dummies(df):
     '''This function creates dummy variables for Council Districts'''
     # Drop district 0
-    df = df[df.council_district != 0]
+    df = df[df['Council District'] != 0]
     # set what we are going to create these dummies from
     dummy_df =  pd.get_dummies(df['Council District'])
     # Name the new columns
@@ -124,7 +124,6 @@ def create_dummies(df):
     # add the dummies to the data frame
     df = pd.concat([df, dummy_df], axis=1)
     return df
-
 #-----------------------------------------------------------------------------
 
 def clean_reason(df):
