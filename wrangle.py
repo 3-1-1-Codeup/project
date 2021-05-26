@@ -89,10 +89,10 @@ def create_delay_columns(df):
     df['pct_time_of_used'] = df.days_open / df.resolution_days_due
     # bin the new feature
     df['level_of_delay'] = pd.cut(df.pct_time_of_used, 
-                            bins = [-20.0,0.25,0.5,0.75,1.0,15,100,800],
-                            labels = ['Extremely Early Response', 'Very Early Response', 
+                            bins = [-20.0,0.5,0.75,1.0,15,800],
+                            labels = ['Very Early Response', 
                                       'Early Response', "On Time Response", "Late Response", 
-                                      'Very Late Response', 'Extremely Late Response'])
+                                      'Very Late Response'])
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
