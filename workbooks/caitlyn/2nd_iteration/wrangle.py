@@ -1,9 +1,19 @@
 import pandas as pd
 import numpy as np
+import os
+
+from pydataset import data
+from datetime import date 
+from scipy import stats
+
+# turn off pink warning boxes
+import warnings
+warnings.filterwarnings("ignore")
+
+import sklearn
+
 from sklearn.model_selection import train_test_split
-import sklearn.preprocessing
-import seaborn as sns
-import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
 
 
 #-----------------------------------------------------------------------------
@@ -89,7 +99,7 @@ def create_delay_columns(df):
     df['pct_time_of_used'] = df.days_open / df.resolution_days_due
     # bin the new feature
     df['level_of_delay'] = pd.cut(df.pct_time_of_used, 
-                            bins = [-20.0,0.25,0.5,0.75,1.0,15,100,800],
+                            bins = [0.0,0.25,0.5,0.75,1.0,15,100,200],
                             labels = ['Extremely Early Response', 'Very Early Response', 
                                       'Early Response', "On Time Response", "Late Response", 
                                       'Very Late Response', 'Extremely Late Response'])
@@ -394,10 +404,8 @@ def clean_311(df):
     df= extract_time(df)
     #add per capita information
     df= add_per_cap_in(df)
-
     #add per sqmiles info
     df = get_sq_miles(df)
-
     #make clean csv with all changes
     df.to_csv('second_clean_311.csv')
     # return df
