@@ -105,7 +105,7 @@ def scale_data(X_train, X_validate, X_test):
     '''
     
     
-    obj_col = []
+    obj_col = ['open_date', 'due_date', 'closed_date', 'is_late', 'dept', 'call_reason', 'case_type', 'case_status', 'source_id', 'address', 'council_district', 'longitude', 'latitude', 'zipcode', 'days_before_or_after_due', 'pct_time_of_used', 'days_open']
     num_train = X_train.drop(columns = obj_col)
     num_validate = X_validate.drop(columns = obj_col)
     num_test = X_test.drop(columns = obj_col)

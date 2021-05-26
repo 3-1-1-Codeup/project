@@ -15,6 +15,7 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
+
 #-----------------------------------------------------------------------------
 
 def get_311_data():
@@ -42,7 +43,7 @@ def drop_and_index(df):
                  'Report Starting Date', 
                  'Report Ending Date' ], inplace=True)
     # Set index to case id
-    df.set_index('CASEID')
+    df.set_index('CASEID', inplace=True)
     return df
 
 #-----------------------------------------------------------------------------
@@ -90,17 +91,22 @@ def create_delay_columns(df):
     df['resolution_days_due'] = df.resolution_days_due // pd.Timedelta('1d')
     # create new feature to show how long it took to resolve compared to resolution due date
     df['days_before_or_after_due'] = df.resolution_days_due - df.days_open
-        # postitive means before days before due data and negative means number of days after due
-    # bin how long it took compare to due date to get level of delay
-    df['level_of_delay'] = pd.cut(df.days_before_or_after_due, 
-                                bins = [-700,-500,-300,-100,0,100,300,500],
-                                labels = ['Extremely Late Response', 'Very Late Response', 
-                                          'Late Response', "On Time Response", "Early Response", 
-                                          'Very Early Response', 'Extremely Early Response'])
+    # replace null values in days open with 0
+    df['days_open'] = df['days_open'].fillna(0)
+    # add 1 to resolution days to offset future issues with upcoming feature
+    df['resolution_days_due'] = df['resolution_days_due'] + 1
+    # create new feature to show how long it took to resolve compared to resolution due date
+    df['pct_time_of_used'] = df.days_open / df.resolution_days_due
+    # bin the new feature
+    df['level_of_delay'] = pd.cut(df.pct_time_of_used, 
+                            bins = [0.0,0.25,0.5,0.75,1.0,15,100,200],
+                            labels = ['Extremely Early Response', 'Very Early Response', 
+                                      'Early Response', "On Time Response", "Late Response", 
+                                      'Very Late Response', 'Extremely Late Response'])
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
-    # return new df
+    # return df
     return df
 
 #-----------------------------------------------------------------------------
@@ -116,17 +122,18 @@ def handle_outliers(df):
 
 def create_dummies(df):
     '''This function creates dummy variables for Council Districts'''
+    # Drop district 0
+    df = df[df['Council District'] != 0]
     # set what we are going to create these dummies from
     dummy_df =  pd.get_dummies(df['Council District'])
     # Name the new columns
-    dummy_df.columns = ['district_0', 'district_1', 'district_2', 
+    dummy_df.columns = ['district_1', 'district_2', 
                         'district_3', 'district_4', 'district_5',
                         'district_6', 'district_7', 'district_8',
                         'district_9', 'district_10']
     # add the dummies to the data frame
     df = pd.concat([df, dummy_df], axis=1)
     return df
-
 #-----------------------------------------------------------------------------
 
 def clean_reason(df):
@@ -184,13 +191,15 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
-    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')               
+    df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')  
+    #drop zipcode nulls after obtaining zipcode
+    df.dropna(subset=['zipcode'], how='all', inplace=True)         
     return df
 
 #-----------------------------------------------------------------------------
 
 # clean the whole df
-def clean_311(df):
+def first_iteration_clean_311(df):
     '''Takes in all previous funcitons to clean the whole df'''
     # Drop columns and set index
     df = drop_and_index(df)
@@ -206,7 +215,7 @@ def clean_311(df):
     df = clean_reason(df)
     # rename columns
     df = clean_column_names(df)
-    df.to_csv('clean_311.csv')
+    df.to_csv('first_iteration_clean_311.csv')
     # return df
     return df
 
@@ -298,8 +307,21 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
 
-
-#-----------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------------------
+def get_sq_miles(df):
+    """
+    This function will apply the square miles per district
+    to each district.
+    """
+    # Creating a dictionary with square miles from city of San Antonio to convert to dataframe
+    sq_miles = {1: 26.00, 2: 59.81, 3: 116.15, 4: 65.21, 5: 22.24, 6: 38.44, 7: 32.82,
+                         8: 71.64, 9: 48.71, 10: 55.62}
+    # Converting to dataframe
+    sq_miles = pd.DataFrame(list(sq_miles.items()),columns = ['council_district','square_miles'])
+    #Merging with the original dataframe
+    df = df.merge(sq_miles, on = 'council_district', how ='left')
+    return df
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 
 def extract_time(df):
     '''
@@ -318,4 +340,73 @@ def extract_time(df):
     # extract week from open_date
     df['open_week'] = df.open_date.dt.week
     
+    return df
+    
+#------------------------------------------------------------------------------------------------------------------------------------------
+def find_voter_info(df):
+    '''This function reads in a dataframe. Using the Council District column, it appends the voter turn out and
+    number of registered voters for each district. It does NOT take into account district 0 due to that being a
+    filler district for outside jurisdictions. It then appends the info onto the dataframe and returns it for later use.'''
+    conditions = [
+    (df['Council District'] == 1),
+    (df['Council District'] == 2), 
+    (df['Council District'] == 3),
+    (df['Council District'] == 4),
+    (df['Council District'] == 5),
+    (df['Council District'] == 6),
+    (df['Council District'] == 7),
+    (df['Council District'] == 8),
+    (df['Council District'] == 9),
+    (df['Council District'] == 10)
+    ]
+    # create a list of the values we want to assign for each condition
+    voter_turnout = [0.148, 0.086, 0.111, 0.078, 0.085, 0.124, 0.154, 0.137, 0.185, 0.154]
+    registered_voters= [68081, 67656, 69022, 66370, 61418, 80007, 83287, 97717, 99309, 91378]
+    # create a new column and use np.select to assign values to it using our lists as arguments
+    df['voter_turnout_2019'] = np.select(conditions, voter_turnout)
+    df['num_of_registered_voters'] = np.select(conditions, registered_voters)
+    return df
+#------------------------------------------------------------------------------------------------------------------------------------------
+def add_per_cap_in(df):
+    '''
+    This function takes in the original cleaned dataframe and adds a per capita
+    income metric by council district
+    '''
+    # Creating a dictionary with per_capita values from city of San Antonio to convert to dataframe
+    per_cap_in = {1: 23967, 2: 19055, 3: 18281, 4: 18500, 5: 13836, 6: 23437, 7: 25263,
+                         8: 35475, 9: 42559, 10: 30240}
+    # Converting to dataframe
+    per_cap_in = pd.DataFrame(list(per_cap_in.items()),columns = ['council_district','per_capita_income'])
+    #Merging with the original dataframe
+    df = df.merge(per_cap_in, on = 'council_district', how ='left')
+    return df
+#------------------------------------------------------------------------------------------------------------------------------------------
+# clean the whole df
+def clean_311(df):
+    '''Takes in all previous funcitons to clean the whole df'''
+    # Drop columns and set index
+    df = drop_and_index(df)
+    # hadle null values
+    df = handle_nulls(df)
+    # creating delay involved columns
+    df = create_delay_columns(df)
+    # handle outliers
+    df = handle_outliers(df)
+    # make dummies
+    df = create_dummies(df)
+    # merge reasons
+    df = clean_reason(df)
+    #add voter information
+    df= find_voter_info(df)
+    # rename columns
+    df = clean_column_names(df)
+    # add date/time information
+    df= extract_time(df)
+    #add per capita information
+    df= add_per_cap_in(df)
+    #add per sqmiles info
+    df = get_sq_miles(df)
+    #make clean csv with all changes
+    df.to_csv('second_clean_311.csv')
+    # return df
     return df
