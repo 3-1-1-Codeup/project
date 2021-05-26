@@ -372,8 +372,9 @@ def add_per_cap_in(df):
     return df
 #------------------------------------------------------------------------------------------------------------------------------------------
 # clean the whole df
+d# clean the whole df
 def clean_311(df):
-    '''Takes in all previous funcitons to clean the whole df'''
+    '''Takes in all previous functions to clean the whole df'''
     # Drop columns and set index
     df = drop_and_index(df)
     # hadle null values
@@ -394,10 +395,11 @@ def clean_311(df):
     df= extract_time(df)
     #add per capita information
     df= add_per_cap_in(df)
-
+​
     #add per sqmiles info
     df = get_sq_miles(df)
-
+    #remove extra nulls
+    df.dropna(subset = ['days_before_or_after_due', 'closed_date'], inplace = True)
     #make clean csv with all changes
     df.to_csv('second_clean_311.csv')
     # return df
