@@ -161,29 +161,7 @@ def days_open_by_week_anova_test(train):
         return print("We reject the null hypothesis that", null_hypothesis)
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dept_chi_test(df):
-    '''Runs chi square test for level and department'''
-    # normlaize makes it percentage
-    observe = pd.crosstab(train.dept, train.level_of_delay, margins = True)
-    chi2, p, degf, expected = stats.chi2_contingency(observe)
-    # Chi test is for catigorical vs catigorical
-    null_hypothesis = "The department hadling a call and the level of delay are independent from each other"
-    alt_hypothesis = "The department and the delay are dependent from one another."
-    alpha = .05 #my confident if 0.95 therfore my alpha is .05
-    if p < alpha:
-        print("I reject the null hypothesis that: \n", null_hypothesis)
-        print(' ')
-        print("I move forward with my alternative hypothesis that \n", alt_hypothesis)
-        print(' ')
-        print(f'The alpha is: \n', alpha)
-        print(' ')
-        print(f'P Value is: \n', p)
-    else:
-        print("I fail to reject the null hypothesis")
-        print("There is not enough evidence to move forward with the alternative hypothesis")
-        print(f'P Value is: \n', p)
-        print(' ')
-        print(f'P Value is: \n', alpha)
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def days_open_by_district_anova_test(train):
     n = train.shape[0]     # number of observations
@@ -238,7 +216,30 @@ def reason_chi_test(df):
         print(' ')
         print(f'P Value is: \n', alpha)
         
-        
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def dept_chi_test(df):
+    '''Runs chi square test for level and department'''
+    # normlaize makes it percentage
+    observe = pd.crosstab(train.dept, train.level_of_delay, margins = True)
+    chi2, p, degf, expected = stats.chi2_contingency(observe)
+    # Chi test is for catigorical vs catigorical
+    null_hypothesis = "The department hadling a call and the level of delay are independent from each other"
+    alt_hypothesis = "The department and the delay are dependent from one another."
+    alpha = .05 #my confident if 0.95 therfore my alpha is .05
+    if p < alpha:
+        print("I reject the null hypothesis that: \n", null_hypothesis)
+        print(' ')
+        print("I move forward with my alternative hypothesis that \n", alt_hypothesis)
+        print(' ')
+        print(f'The alpha is: \n', alpha)
+        print(' ')
+        print(f'P Value is: \n', p)
+    else:
+        print("I fail to reject the null hypothesis")
+        print("There is not enough evidence to move forward with the alternative hypothesis")
+        print(f'P Value is: \n', p)
+        print(' ')
+        print(f'P Value is: \n', alpha)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
 def by_dept_chi_square(train):
     '''This function takes in the train data set, performs a chi squared statistical test, and returns the result of the statistical test.'''
@@ -277,8 +278,29 @@ def by_district_chi_square(train):
         print("We fail to reject the null hypothesis. The null hypothesis is that", null_hypothesis)
     else:
         print("We reject the null hypothesis that", null_hypothesis)   
-        
-        
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
+def chi2(df, variable, target, alpha=0.05):
+    '''
+    This function takes in 4 arguments:
+    1.  df
+    2. categorical variable
+    3.  target variable
+    4. alpha
+    This function returns:
+    1.  chi squared test and statistical analysis
+    '''
+    # crosstab
+    observed = pd.crosstab(df[variable], df[target])
+    # run chi2 test and returns chi2 stats, p-value, degrees of freedom, and explected values.
+    chi2, p, degf, expected = stats.chi2_contingency(observed)
+    # Print the chi2 value and pvalue
+    print(f'chi^2 = {chi2:.4f}')
+    print(f'p     = {p:.4f}\n')
+    # Tests whether the chi_squared test rejects the null hypothesis or not.
+    if p < alpha:
+        print(f'The p-value: {round(p, 4)} is less than alpha: {alpha}, we can reject the null hypothesis')
+    else:
+        print('There is insufficient evidence to reject the null hypothesis')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~T- Tests~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def january_t_test(train):
     H0 = 'there is no difference in days a case is open between month 1 and the rest of the population'
