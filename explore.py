@@ -161,8 +161,6 @@ def days_open_by_week_anova_test(train):
         return print("We reject the null hypothesis that", null_hypothesis)
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def days_open_by_district_anova_test(train):
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
@@ -445,3 +443,31 @@ def registered_voters_t_test(train):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~VISUALIZATION FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def make_days_bad_relplot(train):
+    plt.figure(figsize=(20, 10))
+    sns.relplot(x='case_id', y='days_before_or_after_due', col= 'source_id', hue='dept', data=train)
+    plt.xlabel("Case ID")
+    plt.ylabel("Days early or late")
+    plt.subplots_adjust(top=0.85)
+    plt.suptitle('Evaluating number of days early or late per call type')
+    return plt.show()
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def make_avg_days_by_dept(train):
+    plt.figure(figsize=(20, 10))
+    sns.relplot(x='case_id', y='days_open', col= 'dept', hue='is_late', data=train)
+    plt.xlabel("Case ID")
+    plt.ylabel("Days early or late")
+    plt.subplots_adjust(top=0.85)
+    plt.suptitle('Evaluating average number of days open by dept')
+    return plt.show()
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def make_isLate(train):
+    plt.figure(figsize=(20, 10))
+    sns.stripplot(x="dept", y="case_id", hue='is_late', data=train, jitter=0.05)
+    plt.xlabel("Department")
+    plt.ylabel("Case ID")
+    plt.suptitle('Evaluating is late by department')
+    return plt.show()
