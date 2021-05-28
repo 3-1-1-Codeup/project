@@ -116,12 +116,28 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 ### Stats
 - Stat Test 1: 
-    - which test:
-        - reject of accept null
-
+    - Anova test
+        - Null : "There is no difference in days before or after due date between the districts."
+            - Reject the null
             
 - Stat Test 2: 
-    - which test:
+    - Anova test
+        - reject of accept null
+    
+- Stat Test 3: 
+    - Chi Square
+        - "The department hadling a call and the level of delay are independent from each other"
+    
+- Stat Test 4: 
+    - Chi Square
+        - "The reason for the call and the level of delay are independent from one another"
+    
+- Stat Test 5: 
+    - Anova test
+        - reject of accept null
+    
+- Stat Test 6: 
+    - Anova test
         - reject of accept null
     
 
