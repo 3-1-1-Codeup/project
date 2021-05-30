@@ -400,7 +400,7 @@ Good luck I hope you enjoy your project!
 
 A big thank you to the team that made this all possible:
 
-![team](URL to photo)
+![team](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/team.png?raw=true)
 
 
 >>>>>>>>>>>>>>>
