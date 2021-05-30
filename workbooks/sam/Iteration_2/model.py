@@ -53,7 +53,8 @@ def keep_info(df):
     df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay',
                                    'council_district', 'resolution_days_due', 'district_0', 'district_1', 'district_2',
                                    'district_3', 'district_4','district_5', 'district_6', 'district_7', 'district_8', 
-                                   'district_9','district_10']), 1, inplace=True)
+                                   'district_9','district_10', 'open_month', 'open_week', 'voter_turnout_2019',
+                                   'num_of_registered_voters', 'per_capita_income']), 1, inplace=True)
     return df
 
 #--------------------------------

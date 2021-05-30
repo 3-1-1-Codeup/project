@@ -133,3 +133,25 @@ def create_call_reason_df(df):
     # Adding a "resolution_days_due" median column
     call_reason_df['resolution_days_due_med'] = pd.DataFrame(df.groupby('call_reason').resolution_days_due.median()).reset_index()['resolution_days_due']
     return call_reason_df
+
+def org_multivariate_data(train):
+    waste_df = train[train['dept'] == 'Solid Waste Management']
+    trans_df = train[train['dept'] == 'Trans & Cap Improvements']
+    cust_df = train[train['dept'] == 'Customer Service']
+    unk_df = train[train['dept'] == 'Unknown']
+    metro_df = train[train['dept'] == 'Metro Health']
+    dev_df = train[train['dept'] == 'Development Services']
+    animal_df = train[train['dept'] == 'Animal Care Services']
+    code_df = train[train['dept'] == 'Code Enforcement Services']
+    parks_df = train[train['dept'] == 'Parks and Recreation']
+    district_waste_df = create_district_df(waste_df)
+    district_trans_df = create_district_df(trans_df)
+    district_cust_df = create_district_df(cust_df)
+    district_unk_df = create_district_df(unk_df)
+    district_metro_df = create_district_df(metro_df)
+    district_dev_df = create_district_df(dev_df)
+    district_animal_df = create_district_df(animal_df)
+    district_code_df = create_district_df(code_df)
+    district_parks_df = create_district_df(parks_df)
+    return district_waste_df, district_trans_df, district_cust_df, district_unk_df, district_metro_df, district_dev_df, district_animal_df, district_code_df, district_parks_df
+    

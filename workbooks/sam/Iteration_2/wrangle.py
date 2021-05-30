@@ -89,10 +89,10 @@ def create_delay_columns(df):
     df['pct_time_of_used'] = df.days_open / df.resolution_days_due
     # bin the new feature
     df['level_of_delay'] = pd.cut(df.pct_time_of_used, 
-                            bins = [0.0,0.25,0.5,0.75,1.0,15,100,200],
-                            labels = ['Extremely Early Response', 'Very Early Response', 
+                            bins = [-20.0,0.5,0.75,1.0,15,800],
+                            labels = ['Very Early Response', 
                                       'Early Response', "On Time Response", "Late Response", 
-                                      'Very Late Response', 'Extremely Late Response'])
+                                      'Very Late Response'])
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
@@ -372,8 +372,9 @@ def add_per_cap_in(df):
     return df
 #------------------------------------------------------------------------------------------------------------------------------------------
 # clean the whole df
+# clean the whole df
 def clean_311(df):
-    '''Takes in all previous funcitons to clean the whole df'''
+    '''Takes in all previous functions to clean the whole df'''
     # Drop columns and set index
     df = drop_and_index(df)
     # hadle null values
@@ -396,6 +397,8 @@ def clean_311(df):
     df= add_per_cap_in(df)
     #add per sqmiles info
     df = get_sq_miles(df)
+    #remove extra nulls
+    df.dropna(subset = ['days_before_or_after_due', 'closed_date'], inplace = True)
     #make clean csv with all changes
     df.to_csv('second_clean_311.csv')
     # return df
