@@ -12,6 +12,7 @@
 [[Modeling](#model)]
 [[Conclusion](#conclusion)]
 [[Recreate This Project](#recreate)]
+[[Meet the Team](#team)]
 ___
 
 
@@ -395,7 +396,7 @@ Good luck I hope you enjoy your project!
 
 </details>
     
-## 
+## <a name="team"></a>
 ![meet](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/meet.png?raw=true)
 
 A big thank you to the team that made this all possible:
