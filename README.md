@@ -1,5 +1,5 @@
 <a name="top"></a>
-![name of photo](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/title.png?raw=true)
+![name of photo](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/title.png?raw=true)
 
 ***
 [[Project Description](#project_description)]
@@ -12,11 +12,12 @@
 [[Modeling](#model)]
 [[Conclusion](#conclusion)]
 [[Recreate This Project](#recreate)]
+[[Meet the Team](#team)]
 ___
 
 
 ## <a name="project_description"></a>
-![desc](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/description.png?raw=true)
+![desc](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/description.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -42,7 +43,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
     
 ## <a name="planning"></a> 
-![plan](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/planning.png?raw=true)
+![plan](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/planning.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -102,7 +103,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 
     
 ## <a name="findings"></a> 
-![find](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/findings.png?raw=true)
+![find](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/findings.png?raw=true)
 
 [[Back to top](#top)]
 
@@ -116,12 +117,28 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 ### Stats
 - Stat Test 1: 
-    - which test:
-        - reject of accept null
-
+    - Anova test
+        - Null : "There is no difference in days before or after due date between the districts."
+            - Reject the null
             
 - Stat Test 2: 
-    - which test:
+    - Anova test
+        - reject of accept null
+    
+- Stat Test 3: 
+    - Chi Square
+        - "The department hadling a call and the level of delay are independent from each other"
+    
+- Stat Test 4: 
+    - Chi Square
+        - "The reason for the call and the level of delay are independent from one another"
+    
+- Stat Test 5: 
+    - Anova test
+        - reject of accept null
+    
+- Stat Test 6: 
+    - Anova test
         - reject of accept null
     
 
@@ -148,7 +165,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 </details>
 
 ## <a name="dictionary"></a>
-![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/dict.png?raw=true)
+![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/dict.png?raw=true)
 
 [[Back to top](#top)]
 
@@ -191,7 +208,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 </details>
 
 ## <a name="acquire_and_prep"></a> 
-![acquire_prep](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/acquire_prepare.png?raw=true)
+![acquire_prep](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/a&p.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -228,7 +245,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 
 
 ## <a name="explore"></a> 
-![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/explore.png?raw=true)
+![dict](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/explore.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -242,7 +259,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 </details>    
 
 ## <a name="stats"></a> 
-![stats](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/stats.png?raw=true)
+![stats](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/stats.png?raw=true)
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
@@ -312,7 +329,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 </details>    
 
 ## <a name="model"></a> 
-![model](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/model.png?raw=true)
+![model](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/model.png?raw=true)
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
@@ -350,7 +367,7 @@ Summary of modeling choices...
 </details>  
 
 ## <a name="conclusion"></a> 
-![conclusion](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/for_readme/conc.png?raw=true)
+![conclusion](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/conclusion.png?raw=true)
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
@@ -366,7 +383,7 @@ We recommend...
 
 
 ## <a name="Recreate This Project"></a> 
-![recreate](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/readme_images/recreate.png?raw=true)
+![recreate](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/recreate.png?raw=true)
 [[Back to top](#top)]
 
 <details>
@@ -379,11 +396,12 @@ Good luck I hope you enjoy your project!
 
 </details>
     
+## <a name="team"></a>
+![meet](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/meet.png?raw=true)
 
+A big thank you to the team that made this all possible:
 
-## 
-
-![Folder Contents](URL to photo)
+![team](https://github.com/3-1-1-Codeup/project/blob/main/workbooks/caitlyn/images/read_me_take3/team.png?raw=true)
 
 
 >>>>>>>>>>>>>>>
