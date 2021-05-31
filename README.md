@@ -265,19 +265,20 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
-
+### Stats Test 1:
 #### Confidence level and alpha value:
 - We established a 95% confidence level through computing the following:
   - alpha = 1 - confidence, therefore alpha is 0.05
   
-### Stats Test 1:
+
 - What is the test?
-    - 
+    - The test used for this hypothesis testing was the ANOVA test.
 - Why use this test?
-    - 
+    - The ANOVA test tests the means between many groups to determine if there is a difference.
 - What is being compared?
-    - 
-Is there a significant difference between districts for days before or after due date?
+    - The mean of days before or after due for each district.
+- Question being asked:
+    -Is there a significant difference between districts for days before or after due date?
     
 #### Hypothesis:
 
@@ -285,53 +286,58 @@ Is there a significant difference between districts for days before or after due
 
 - $H_a$: There is a significant difference in days before or after due date between the districts.
 
-
-- The null hypothesis (H<sub>0</sub>) is...
-    - 
-- The alternate hypothesis (H<sub>1</sub>) is ...
-    - 
-
-
-
-
 #### Results:
-- Reject the null or fail to reject
-- Move forward with Alternative Hypothesis or not 
-
-- Summary:
-    - F score of:
-        - 
-    - P vlaue of:
-        - 
+- We reject the null hypothesis that there is no difference in days before or after due date between the districts.
+- We are able to move forward to explore the alternative hypothesis. 
 
 ### Stats Test 2:
+    
+#### Confidence level and alpha value:
+- We established a 95% confidence level through computing the following:
+  - alpha = 1 - confidence, therefore alpha is 0.05
+    
 - What is the test?
-    - 
+    - The test used for this hypothesis testing was the Chi$^2$ Test.
 - Why use this test?
-    - 
+    - This test was used because it compares two categorical data variables.
 - What is being compared?
-    - 
+    -   Call reason and level of delay
+- Question being asked:
+    - Is there a significant difference between the call reason and level of delay?
 
 #### Hypothesis:
-- The null hypothesis (H<sub>0</sub>) is...
-    - 
-- The alternate hypothesis (H<sub>1</sub>) is ...
-    - 
-
-
-#### Confidence level and alpha value:
-- I established a 95% confidence level
-- alpha = 1 - confidence, therefore alpha is 0.05
+- $H_0$: "The call reason of the issue and the level of delay are independent from each other"
+    
+- $H_a$: "The call reason and the level of delay are dependent from one another."
 
 #### Results:
-- Reject the null or fail to reject
-- Move forward with Alternative Hypothesis or not 
+- We reject the null hypothesis.  The call reason and the level of delay are dependent from one another.
+- We are able to move forward with to explore the alternative hypothesis.
 
-- Summary:
-    - F score of:
-        - 
-    - P vlaue of:
-        - 
+
+### Stats Test 3:
+    
+#### Confidence level and alpha value:
+- We established a 95% confidence level through computing the following:
+  - alpha = 1 - confidence, therefore alpha is 0.05
+    
+- What is the test?
+    - The test used for this hypothesis testing was the Mann-Whitney U Test.
+- Why use this test?
+    - This test was used because it is used to test whether two samples are likely to derive from the same population .
+- What is being compared?
+    -   Response times between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income.
+- Question being asked:
+    - Is there a difference for response time for all districts that fall below 20,000 per capita income and those that are above?
+    
+#### Hypothesis:
+- $H_0$: There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+    
+- $H_a$: There is a difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+
+#### Results:
+- We reject the null hypothesis that there is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+- We are able to move forward with to explore the alternative hypothesis.
 
 ***
 
