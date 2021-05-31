@@ -284,9 +284,9 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 #### Hypothesis:
 
-- $H_0$ : There is no difference in days before or after due date between the districts.
+- Null Hypothesis: There is no difference in days before or after due date between the districts.
 
-- $H_a$ : There is a significant difference in days before or after due date between the districts.
+- Alternative Hypothesis: There is a significant difference in days before or after due date between the districts.
 
 #### Results:
 - We reject the null hypothesis that there is no difference in days before or after due date between the districts.
@@ -308,9 +308,9 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Is there a significant difference between the call reason and level of delay?
 
 #### Hypothesis:
-- $H_0$: "The call reason of the issue and the level of delay are independent from each other"
+- Null Hypothesis: "The call reason of the issue and the level of delay are independent from each other"
     
-- $H_a$: "The call reason and the level of delay are dependent from one another."
+- Alternative Hypothesis: "The call reason and the level of delay are dependent from one another."
 
 #### Results:
 - We reject the null hypothesis.  The call reason and the level of delay are dependent from one another.
@@ -333,9 +333,9 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Is there a difference for response time for all districts that fall below 20,000 per capita income and those that are above?
     
 #### Hypothesis:
-- $H_0$: There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+- Null Hypothesis: There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
     
-- $H_a$: There is a difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+- Alternative Hypothesis: There is a difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
 
 #### Results:
 - We reject the null hypothesis that there is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
