@@ -49,28 +49,39 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 <details>
   <summary>Click to expand!</summary>
 
-### Projet Outline:
+### Project Outline:
+  
+- Acquisition of data:
+- Download CSV from the City of San Antonio website.
+  - https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+- Bring data into python
+  
+  
+  
+  
+  Projet Outline:
     
 - Acquisiton of data:
     - Download CSV from the City of San Antonio website.
         - https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7 
     - Bring data into python
-    - Run basic exploration
-        - .info()
-        - .describe()
-        - .isnull()
-        - .value_counts()
-        - basic univariate
-        - key take aways
-- Prepare and clean data with python - Jupyter Labs
+    - Run basic exploration: 
+      -.info()
+      -.describe()
+      -.isnull()
+      -.value_counts()
+      -basic univariate
+      -key takeaways
+- Prepare and clean data with python - Jupyter Labs: 
     - Set index
     - Drop features
     - Handle null values
     - Handle outliers
-    - Merge some feature values together (only the ones that go with each other)
+    - Merge some feature values (only the ones that go with each other)
     - Rename
     - Create
-    - Bin to create new categorical feature(s)
+    - Bin to create a new categorical feature(s)
+  
 - Explore data:
     - What are the features?
     - What questions are we aiming to answer?
@@ -88,15 +99,15 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Conclude results.
         
 ### Hypothesis/Questions
-- Does the type of call in an area effect the level of response?
-- Does the specific location effect the response time?
-- Does category and department affect response time?
+- Does the type of call in an area affect the level of response?
+- Does the specific location affect the response time?
+- Do category and department affect response time?
 - Is there a link to which form of reporting is responded to quickest and slowest?
 
 ### Target variable
 - `level_of_delay`
     - Made in the feature engineering step.
-        - This feature takes the number of days a case was open (open-closed) and divided it by the number of days the case was given to be resolved (open-due) and calculates the percent of the allocated resolution time that was used
+        - This feature takes the number of days a case was open (open-closed) and divided it by the number of days the case was given to be resolved and calculates the percent of the allocated resolution time that was used.
 
 
 </details>
