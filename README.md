@@ -128,31 +128,19 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 ### Stats
 - Stat Test 1: 
-    - Anova test
+    - Anova
         - Null : "There is no difference in days before or after due date between the districts."
             - Reject the null
             
 - Stat Test 2: 
-    - Anova test
-        - reject of accept null
+    - Chi$^2$
+        - Null: "The call reason of the issue and the level of delay are independent from each other"
+        - Reject the null
     
 - Stat Test 3: 
-    - Chi Square
-        - "The department hadling a call and the level of delay are independent from each other"
-    
-- Stat Test 4: 
-    - Chi Square
-        - "The reason for the call and the level of delay are independent from one another"
-    
-- Stat Test 5: 
-    - Anova test
-        - reject of accept null
-    
-- Stat Test 6: 
-    - Anova test
-        - reject of accept null
-    
-
+    - Mann-Whitney U 
+        - Null: "There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time." 
+        - Reject the null
 ### Modeling:
 - Baseline:
     - 77.2 %
