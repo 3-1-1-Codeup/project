@@ -20,6 +20,12 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 def upper_lower_mw_testing(train):
     null_hypothesis="there is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time."
+    district_2 = train[train['council_district'] == 2]
+    n = train.shape[0]     # number of observations
+    degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
+    conf_interval = .95 # desired confidence interval
+    α = 1 - conf_interval
+    t, p = stats.ttest_1samp(district_2.days_before_or_after_due, train.days_before_or_after_due.mean())
     districts_lower = train[(train['council_district'] == 2) | (train['council_district'] == 3) | (train['council_district'] == 4) | (train['council_district'] == 5)]
     districts_upper = train[(train['council_district'] == 1) | (train['council_district'] == 6) | (train['council_district'] == 7) | (train['council_district'] == 8) | (train['council_district'] == 9) | (train['council_district'] == 10)]
     districts_lower.days_before_or_after_due.std(), districts_upper.days_before_or_after_due.std()
@@ -574,7 +580,7 @@ def dist_timely():
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def dist_calls_month():
-'''A distribution of calls by month. Seems as though less calls are being made during the fall and winter months.'''
+    '''A distribution of calls by month. Seems as though less calls are being made during the fall and winter months.'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.countplot(data = df, x = 'open_month', palette = "magma").set_title('Count of Calls by Month Opened')
@@ -587,7 +593,7 @@ def avg_by_month():
     sns.barplot(data = train.groupby('open_month').mean().reset_index(), x = 'open_month', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due by Month')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dbad_dist_avg()
+def dbad_dist_avg():
     ''' Showing the days_before_or_after_due average by district, district 2 is the latest. Looks like those 
  northern districts are getting better service too. Although with the evening out that happens on median
  perhaps there are some outliers that are dragging the numbers down.'''
@@ -606,7 +612,7 @@ given low priority.'''
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def dept_count_plot():
-     '''Showing the counts of calls by dept, solid waste management is the most called on by far'''
+    '''Showing the counts of calls by dept, solid waste management is the most called on by far'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.countplot(data = train, x = 'dept', palette = "viridis").set_title('Counts of Calls by Department')
