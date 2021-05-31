@@ -265,7 +265,9 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 [[Back to top](#top)]
 <details>
   <summary>Click to expand!</summary>
+
 ### Stats Test 1:
+  
 #### Confidence level and alpha value:
 - We established a 95% confidence level through computing the following:
   - alpha = 1 - confidence, therefore alpha is 0.05
@@ -282,9 +284,9 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 #### Hypothesis:
 
-- $H_0$: There is no difference in days before or after due date between the districts.
+- $H_0$ : There is no difference in days before or after due date between the districts.
 
-- $H_a$: There is a significant difference in days before or after due date between the districts.
+- $H_a$ : There is a significant difference in days before or after due date between the districts.
 
 #### Results:
 - We reject the null hypothesis that there is no difference in days before or after due date between the districts.
