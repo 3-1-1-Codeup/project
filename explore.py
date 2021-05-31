@@ -445,6 +445,71 @@ def registered_voters_t_test(train):
         
         
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PREP FOR VISUALIZATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+def create_district_df(df):
+    '''
+    This function takes in the original dataframe and returns
+    a dataframe with the quantitative variables averaged by district
+    for easier exploration
+    '''
+    # Creating a dataframe with zipcode and a "days_open" averaged column
+    district_df = pd.DataFrame(df.groupby('council_district').days_open.mean()).reset_index()
+    # Adding a "days_before_or_after_due" averaged column
+    district_df['days_before_or_after_due'] = pd.DataFrame(df.groupby('council_district').days_before_or_after_due.mean()).reset_index()['days_before_or_after_due']
+    # Adding a "resolution_days_due" averaged column
+    district_df['resolution_days_due'] = pd.DataFrame(df.groupby('council_district').resolution_days_due.mean()).reset_index()['resolution_days_due']
+    # Adding a "days_open" median column
+    district_df['days_open_med'] = pd.DataFrame(df.groupby('council_district').days_open.median()).reset_index()['days_open']
+    # Adding a "days_before_or_after_due" median column
+    district_df['days_before_or_after_due_med'] = pd.DataFrame(df.groupby('council_district').days_before_or_after_due.median()).reset_index()['days_before_or_after_due']
+    # Adding a "resolution_days_due" median column
+    district_df['resolution_days_due_med'] = pd.DataFrame(df.groupby('council_district').resolution_days_due.median()).reset_index()['resolution_days_due']
+    return district_df
+
+def create_dept_df(df):
+    '''
+    This function takes in the original dataframe and returns
+    a dataframe with the quantitative variables averaged by dept
+    for easier exploration
+    '''
+    # Creating a dataframe with zipcode and a "days_open" averaged column
+    dept_df = pd.DataFrame(df.groupby('dept').days_open.mean()).reset_index()
+    # Adding a "days_before_or_after_due" averaged column
+    dept_df['days_before_or_after_due'] = pd.DataFrame(df.groupby('dept').days_before_or_after_due.mean()).reset_index()['days_before_or_after_due']
+    # Adding a "resolution_days_due" averaged column
+    dept_df['resolution_days_due'] = pd.DataFrame(df.groupby('dept').resolution_days_due.mean()).reset_index()['resolution_days_due']
+    # Adding a "days_open" median column
+    dept_df['days_open_med'] = pd.DataFrame(df.groupby('dept').days_open.median()).reset_index()['days_open']
+    # Adding a "days_before_or_after_due" median column
+    dept_df['days_before_or_after_due_med'] = pd.DataFrame(df.groupby('dept').days_before_or_after_due.median()).reset_index()['days_before_or_after_due']
+    # Adding a "resolution_days_due" median column
+    dept_df['resolution_days_due_med'] = pd.DataFrame(df.groupby('dept').resolution_days_due.median()).reset_index()['resolution_days_due']
+    return dept_df
+
+def create_call_reason_df(df):
+    '''
+    This function takes in the original dataframe and returns
+    a dataframe with the quantitative variables averaged by dept
+    for easier exploration
+    '''
+    # Creating a dataframe with zipcode and a "days_open" averaged column
+    call_reason_df = pd.DataFrame(df.groupby('call_reason').days_open.mean()).reset_index()
+    # Adding a "days_before_or_after_due" averaged column
+    call_reason_df['days_before_or_after_due'] = pd.DataFrame(df.groupby('call_reason').days_before_or_after_due.mean()).reset_index()['days_before_or_after_due']
+    # Adding a "resolution_days_due" averaged column
+    call_reason_df['resolution_days_due'] = pd.DataFrame(df.groupby('call_reason').resolution_days_due.mean()).reset_index()['resolution_days_due']
+     # Adding a "days_open" median column
+    call_reason_df['days_open_med'] = pd.DataFrame(df.groupby('call_reason').days_open.median()).reset_index()['days_open']
+    # Adding a "days_before_or_after_due" median column
+    call_reason_df['days_before_or_after_due_med'] = pd.DataFrame(df.groupby('call_reason').days_before_or_after_due.median()).reset_index()['days_before_or_after_due']
+    # Adding a "resolution_days_due" median column
+    call_reason_df['resolution_days_due_med'] = pd.DataFrame(df.groupby('call_reason').resolution_days_due.median()).reset_index()['resolution_days_due']
+    return call_reason_df
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~      
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~VISUALIZATION FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -565,61 +630,64 @@ def plot_response_by_reason(df):
     # just show the visual
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dist_council():
+def dist_council(df):
     '''A distribution of calls by council district. The northern districts seem to make 311 reports less often'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.countplot(data = df, x = 'council_district', palette = "magma").set_title('Count of Calls by District')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dist_timely():
+def dist_timely(df):
     '''A distribution of responses by how timely they were. Most responses are very early it would seem'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.countplot(data = df, x = 'level_of_delay', palette = "magma").set_title('Counts by Level of Delay')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dist_calls_month():
+def dist_calls_month(df):
     '''A distribution of calls by month. Seems as though less calls are being made during the fall and winter months.'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.countplot(data = df, x = 'open_month', palette = "magma").set_title('Count of Calls by Month Opened')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def avg_by_month():
+def avg_by_month(train):
     ''' Distribution of average response time by month'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.barplot(data = train.groupby('open_month').mean().reset_index(), x = 'open_month', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due by Month')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dbad_dist_avg():
+def dbad_dist_avg(train):
     ''' Showing the days_before_or_after_due average by district, district 2 is the latest. Looks like those 
  northern districts are getting better service too. Although with the evening out that happens on median
  perhaps there are some outliers that are dragging the numbers down.'''
+    district_df = create_district_df(train)
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.barplot(data = district_df, x = 'council_district', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dbad_dept_avg():
+def dbad_dept_avg(train):
     '''Showing the days_before_or_after_due average by dept, buildings obviously taking the longest and cleanup 
 is also regularly late. Customer service may appear to perform poorly because their tasks are typically 
 given low priority.'''
+    call_reason_df = create_call_reason_df(train)
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.barplot(data = call_reason_df, x = 'call_reason', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due Date by Reason')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dept_count_plot():
+def dept_count_plot(train):
     '''Showing the counts of calls by dept, solid waste management is the most called on by far'''
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.countplot(data = train, x = 'dept', palette = "viridis").set_title('Counts of Calls by Department')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def dbad_avg_plot():
+def dbad_avg_plot(train):
     '''Showing the days_before_or_after_due average by dept, with the consistency of district response times in 
  comparison, it would seem department and call_reason are large indicators of how early/late a task will be done'''
+    dept_df = create_dept_df(train)
     plt.subplots(figsize=(22, 6))
     sns.set_theme(style="darkgrid")
     sns.barplot(data = dept_df, x = 'dept', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due Date by Department')
