@@ -225,8 +225,8 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 *All functions for the following preparation can be found in the wrangle.py file on our github repository.*
 - Make case id the index
 - Handle null values 
-- Remove features that are not needed
-- Create new features such as
+- Remove unneeded features
+- Create new features such as:
     - days_open
     - resolution_days_due
     - days_before_or_after_due
@@ -234,8 +234,8 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - voter_turnout_2019
     - num_of_registered_voters
     - per_capita_income
-- Create dumy columns for district
-- Rename the features to make them easier to understand
+- Create dummy columns for district
+- Rename the features to make them easier to understand and to make them easier for python to call
 - Merge some values that go hand in hand from reason for calling 
 - Extract zip code from the address
 
