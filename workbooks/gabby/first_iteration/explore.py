@@ -73,7 +73,7 @@ def get_chi_square(train):
     conf_interval = .95 # desired confidence interval
     α = 1 - conf_interval
     # set the null hypothesis
-    null_hypothesis = 'there is no difference in if a case resoution is late between the districts.'
+    null_hypothesis = 'there is no difference in if a case resolution is late between the districts.'
     # make contigency table
     contingency_table = pd.crosstab(train.council_district, train.is_late)
     # run chi squared test
