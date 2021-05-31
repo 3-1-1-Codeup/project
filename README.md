@@ -151,7 +151,8 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Decision Tree
     - Random Forest
     - SGD Classifier
-    - Ridge CLassifier
+    - Ridge Classifier
+    - Ridge CV Classifier
 - Best Model:
     - 
 - Model testing:
@@ -202,7 +203,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 | square_miles | Square miles in the district | float64 |
 | voter_turnout_2019 | How Many people showed up to vote in 2019 in that district | float64 | 
     
-\*  Indicates the target feature in this Zillow data.
+\*  Indicates the target feature in this City of San Antonio data.
 
 ***
 </details>
@@ -217,11 +218,12 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 ### Acquire Data:
 - Data was gathered from "The City of San Antonio" website
     - https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+  
 - Added data from the following website to create features such as per_capita_income, voter_turnout, etc.
     - https://sa2020.org/city-council-profiles
     
 ### Prepare Data
-*All funcitons for the following preparation can be found in the wrangle.py file on our github repository.*
+*All functtons for the following preparation can be found in the wrangle.py file on our github repository.*
 - Make case id the index
 - Handle null values 
 - Remove features that are not needed
@@ -416,7 +418,7 @@ We recommend...
     - Start by cloning the github repository on your From your terminal command line, type: 
     git clone git@github.com:3-1-1-Codeup/project.git
   
-    - Download .CSV of Data from and name it as service-calls.csv in your working directory:
+    - Download .CSV of Data from the link below and name it as service-calls.csv in your working directory:
     https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
   
     - Use the wrangle.py, explore.py, and model.py to follow the processes we used.
