@@ -373,10 +373,33 @@ Summary of modeling choices...
   <summary>Click to expand!</summary>
 
 We found....
+    - Each department is better in certain areas about being on time/early and late in others.
 
+    - The more calls a department had the better they were at getting issues resolved on time.
+
+    - Internal requests were generally late in comparison to other forms of reporting.
+
+    - When an issue was reported via the app, there were no extremely late responses.
+
+    - Customer Service generally got issues resolved late or very late. 
+
+    - Animal Services usually only gave a day to complete a case and those cases usually took months to close.
+
+    - Winter months tend to have the longest average days open time, while Autumn months have the shortest.
 With further time...
+    - Overall extremely late responses are spread out throughout the city. There is a significant delay within calls listed as on time. Therefore, we would like to evaluate the amount of time between districts for calls that were considered on time. 
+    - Analyze the data further through time series analysis. Some questions that we would like to investigate are:
+        - Do days of the week effect when the case was done?
+        - Are Mondays the slowest days because of the weekend backlog?
+        - Do minor holidays affect response time?
+    - Obtain census data to gain insight more into zip codes, neighborhoods, and demographics beyond just the large districts.
+    - Determine priority level for each call as a feature based on the number of days given and department to explore if there is a correlation with the level of delay.
 
 We recommend...
+    - The City of San Antonio should create standardized timelines for each department to follow when solving cases.
+    - Animal Care Services and Customer Service should both have a thorough review of their cases and timelines to rectify latency issues.
+    - Late and extremely late cases should be investigated through all departments.
+    - The classification in the raw data set for whether a case was completed late or not needs to be re-made. This is due to an issue where this feature classifies cases as being late when they were completed as late. For example if a case was due in fifteen days but was completed a day before its due date, it would be classified as late.
 
 
 </details>  
@@ -390,7 +413,11 @@ We recommend...
   <summary>Click to expand!</summary>
 
 ### 1. Getting started
-
+    - Start by cloning the github repository on your From your terminal command line, type: 
+    git clone git@github.com:3-1-1-Codeup/project.git
+    - Download .CSV of Data from and name it as service-calls.csv in your working directory:
+    https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+    - Use the wrangle.py, explore.py, and model.py to follow the processes we used.
     
 Good luck I hope you enjoy your project!
 
