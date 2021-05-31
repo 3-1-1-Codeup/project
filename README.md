@@ -49,28 +49,39 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 <details>
   <summary>Click to expand!</summary>
 
-### Projet Outline:
+### Project Outline:
+  
+- Acquisition of data:
+- Download CSV from the City of San Antonio website.
+  - https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+- Bring data into python
+  
+  
+  
+  
+  Projet Outline:
     
 - Acquisiton of data:
     - Download CSV from the City of San Antonio website.
         - https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7 
     - Bring data into python
-    - Run basic exploration
-        - .info()
-        - .describe()
-        - .isnull()
-        - .value_counts()
-        - basic univariate
-        - key take aways
-- Prepare and clean data with python - Jupyter Labs
+    - Run basic exploration: 
+      -.info()
+      -.describe()
+      -.isnull()
+      -.value_counts()
+      -basic univariate
+      -key takeaways
+- Prepare and clean data with python - Jupyter Labs: 
     - Set index
     - Drop features
     - Handle null values
     - Handle outliers
-    - Merge some feature values together (only the ones that go with each other)
+    - Merge some feature values (only the ones that go with each other)
     - Rename
     - Create
-    - Bin to create new categorical feature(s)
+    - Bin to create a new categorical feature(s)
+  
 - Explore data:
     - What are the features?
     - What questions are we aiming to answer?
@@ -88,15 +99,15 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Conclude results.
         
 ### Hypothesis/Questions
-- Does the type of call in an area effect the level of response?
-- Does the specific location effect the response time?
-- Does category and department affect response time?
+- Does the type of call in an area affect the level of response?
+- Does the specific location affect the response time?
+- Do category and department affect response time?
 - Is there a link to which form of reporting is responded to quickest and slowest?
 
 ### Target variable
 - `level_of_delay`
     - Made in the feature engineering step.
-        - This feature takes the number of days a case was open (open-closed) and divided it by the number of days the case was given to be resolved (open-due) and calculates the percent of the allocated resolution time that was used
+        - This feature takes the number of days a case was open (open-closed) and divided it by the number of days the case was given to be resolved and calculates the percent of the allocated resolution time that was used.
 
 
 </details>
@@ -117,31 +128,19 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 ### Stats
 - Stat Test 1: 
-    - Anova test
+    - Anova
         - Null : "There is no difference in days before or after due date between the districts."
             - Reject the null
             
 - Stat Test 2: 
-    - Anova test
-        - reject of accept null
+    - Chi$^2$
+        - Null: "The call reason of the issue and the level of delay are independent from each other"
+        - Reject the null
     
 - Stat Test 3: 
-    - Chi Square
-        - "The department hadling a call and the level of delay are independent from each other"
-    
-- Stat Test 4: 
-    - Chi Square
-        - "The reason for the call and the level of delay are independent from one another"
-    
-- Stat Test 5: 
-    - Anova test
-        - reject of accept null
-    
-- Stat Test 6: 
-    - Anova test
-        - reject of accept null
-    
-
+    - Mann-Whitney U 
+        - Null: "There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time." 
+        - Reject the null
 ### Modeling:
 - Baseline:
     - 77.2 %
@@ -151,7 +150,8 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Decision Tree
     - Random Forest
     - SGD Classifier
-    - Ridge CLassifier
+    - Ridge Classifier
+    - Ridge CV Classifier
 - Best Model:
     - 
 - Model testing:
@@ -202,7 +202,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 | square_miles | Square miles in the district | float64 |
 | voter_turnout_2019 | How Many people showed up to vote in 2019 in that district | float64 | 
     
-\*  Indicates the target feature in this Zillow data.
+\*  Indicates the target feature in this City of San Antonio data.
 
 ***
 </details>
@@ -217,15 +217,16 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 ### Acquire Data:
 - Data was gathered from "The City of San Antonio" website
     - https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+  
 - Added data from the following website to create features such as per_capita_income, voter_turnout, etc.
     - https://sa2020.org/city-council-profiles
     
 ### Prepare Data
-*All funcitons for the following preparation can be found in the wrangle.py file on our github repository.*
+*All functions for the following preparation can be found in the wrangle.py file on our github repository.*
 - Make case id the index
 - Handle null values 
-- Remove features that are not needed
-- Create new features such as
+- Remove unneeded features
+- Create new features such as:
     - days_open
     - resolution_days_due
     - days_before_or_after_due
@@ -233,8 +234,8 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - voter_turnout_2019
     - num_of_registered_voters
     - per_capita_income
-- Create dumy columns for district
-- Rename the features to make them easier to understand
+- Create dummy columns for district
+- Rename the features to make them easier to understand and to make them easier for python to call
 - Merge some values that go hand in hand from reason for calling 
 - Extract zip code from the address
 
@@ -264,64 +265,80 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 <details>
   <summary>Click to expand!</summary>
 
-
 ### Stats Test 1:
-- What is the test?
-    - 
-- Why use this test?
-    - 
-- What is being compared?
-    - 
-
-#### Hypothesis:
-- The null hypothesis (H<sub>0</sub>) is...
-    - 
-- The alternate hypothesis (H<sub>1</sub>) is ...
-    - 
-
-
+  
 #### Confidence level and alpha value:
-- I established a 95% confidence level
-- alpha = 1 - confidence, therefore alpha is 0.05
+- We established a 95% confidence level through computing the following:
+  - alpha = 1 - confidence, therefore alpha is 0.05
+  
+
+- What is the test?
+    - The test used for this hypothesis testing was the ANOVA test.
+- Why use this test?
+    - The ANOVA test tests the means between many groups to determine if there is a difference.
+- What is being compared?
+    - The mean of days before or after due for each district.
+- Question being asked:
+    -Is there a significant difference between districts for days before or after due date?
+    
+#### Hypothesis:
+
+- Null Hypothesis: There is no difference in days before or after due date between the districts.
+
+- Alternative Hypothesis: There is a significant difference in days before or after due date between the districts.
 
 #### Results:
-- Reject the null or fail to reject
-- Move forward with Alternative Hypothesis or not 
-
-- Summary:
-    - F score of:
-        - 
-    - P vlaue of:
-        - 
+- We reject the null hypothesis that there is no difference in days before or after due date between the districts.
+- We are able to move forward to explore the alternative hypothesis. 
 
 ### Stats Test 2:
+    
+#### Confidence level and alpha value:
+- We established a 95% confidence level through computing the following:
+  - alpha = 1 - confidence, therefore alpha is 0.05
+    
 - What is the test?
-    - 
+    - The test used for this hypothesis testing was the Chi$^2$ Test.
 - Why use this test?
-    - 
+    - This test was used because it compares two categorical data variables.
 - What is being compared?
-    - 
+    -   Call reason and level of delay
+- Question being asked:
+    - Is there a significant difference between the call reason and level of delay?
 
 #### Hypothesis:
-- The null hypothesis (H<sub>0</sub>) is...
-    - 
-- The alternate hypothesis (H<sub>1</sub>) is ...
-    - 
-
-
-#### Confidence level and alpha value:
-- I established a 95% confidence level
-- alpha = 1 - confidence, therefore alpha is 0.05
+- Null Hypothesis: "The call reason of the issue and the level of delay are independent from each other"
+    
+- Alternative Hypothesis: "The call reason and the level of delay are dependent from one another."
 
 #### Results:
-- Reject the null or fail to reject
-- Move forward with Alternative Hypothesis or not 
+- We reject the null hypothesis.  The call reason and the level of delay are dependent from one another.
+- We are able to move forward with to explore the alternative hypothesis.
 
-- Summary:
-    - F score of:
-        - 
-    - P vlaue of:
-        - 
+
+### Stats Test 3:
+    
+#### Confidence level and alpha value:
+- We established a 95% confidence level through computing the following:
+  - alpha = 1 - confidence, therefore alpha is 0.05
+    
+- What is the test?
+    - The test used for this hypothesis testing was the Mann-Whitney U Test.
+- Why use this test?
+    - This test was used because it is used to test whether two samples are likely to derive from the same population .
+- What is being compared?
+    -   Response times between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income.
+- Question being asked:
+    - Is there a difference for response time for all districts that fall below 20,000 per capita income and those that are above?
+    
+#### Hypothesis:
+- Null Hypothesis: There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+    
+- Alternative Hypothesis: There is a difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+
+#### Results:
+- We reject the null hypothesis that there is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
+- We are able to move forward with to explore the alternative hypothesis.
 
 ***
 
@@ -373,10 +390,37 @@ Summary of modeling choices...
   <summary>Click to expand!</summary>
 
 We found....
+  
+    - Each department is better in certain areas about being on time/early and late in others.
+
+    - The more calls a department had the better they were at getting issues resolved on time.
+
+    - Internal requests were generally late in comparison to other forms of reporting.
+
+    - When an issue was reported via the app, there were no extremely late responses.
+
+    - Customer Service generally got issues resolved late or very late. 
+
+    - Animal Services usually only gave a day to complete a case and those cases usually took months to close.
+
+    - Winter months tend to have the longest average days open time, while Autumn months have the shortest.
 
 With further time...
+  
+    - Overall extremely late responses are spread out throughout the city. There is a significant delay within calls listed as on time. Therefore, we would like to evaluate the amount of time between districts for calls that were considered on time. 
+    - Analyze the data further through time series analysis. Some questions that we would like to investigate are:
+        - Do days of the week effect when the case was done?
+        - Are Mondays the slowest days because of the weekend backlog?
+        - Do minor holidays affect response time?
+    - Obtain census data to gain insight more into zip codes, neighborhoods, and demographics beyond just the large districts.
+    - Determine priority level for each call as a feature based on the number of days given and department to explore if there is a correlation with the level of delay.
 
 We recommend...
+  
+    - The City of San Antonio should create standardized timelines for each department to follow when solving cases.
+    - Animal Care Services and Customer Service should both have a thorough review of their cases and timelines to rectify latency issues.
+    - Late and extremely late cases should be investigated through all departments.
+    - The classification in the raw data set for whether a case was completed late or not needs to be re-made. This is due to an issue where this feature classifies cases as being late when they were completed as late. For example if a case was due in fifteen days but was completed a day before its due date, it would be classified as late.
 
 
 </details>  
@@ -390,7 +434,13 @@ We recommend...
   <summary>Click to expand!</summary>
 
 ### 1. Getting started
-
+    - Start by cloning the github repository on your From your terminal command line, type: 
+    git clone git@github.com:3-1-1-Codeup/project.git
+  
+    - Download .CSV of Data from the link below and name it as service-calls.csv in your working directory:
+    https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+  
+    - Use the wrangle.py, explore.py, and model.py to follow the processes we used.
     
 Good luck I hope you enjoy your project!
 
