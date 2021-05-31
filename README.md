@@ -223,7 +223,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - https://sa2020.org/city-council-profiles
     
 ### Prepare Data
-*All functtons for the following preparation can be found in the wrangle.py file on our github repository.*
+*All functions for the following preparation can be found in the wrangle.py file on our github repository.*
 - Make case id the index
 - Handle null values 
 - Remove features that are not needed
@@ -266,7 +266,10 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 <details>
   <summary>Click to expand!</summary>
 
-
+#### Confidence level and alpha value:
+- We established a 95% confidence level through computing the following:
+  - alpha = 1 - confidence, therefore alpha is 0.05
+  
 ### Stats Test 1:
 - What is the test?
     - 
@@ -274,17 +277,22 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - 
 - What is being compared?
     - 
-
+Is there a significant difference between districts for days before or after due date?
+    
 #### Hypothesis:
+
+- $H_0$: There is no difference in days before or after due date between the districts.
+
+- $H_a$: There is a significant difference in days before or after due date between the districts.
+
+
 - The null hypothesis (H<sub>0</sub>) is...
     - 
 - The alternate hypothesis (H<sub>1</sub>) is ...
     - 
 
 
-#### Confidence level and alpha value:
-- I established a 95% confidence level
-- alpha = 1 - confidence, therefore alpha is 0.05
+
 
 #### Results:
 - Reject the null or fail to reject
@@ -375,6 +383,7 @@ Summary of modeling choices...
   <summary>Click to expand!</summary>
 
 We found....
+  
     - Each department is better in certain areas about being on time/early and late in others.
 
     - The more calls a department had the better they were at getting issues resolved on time.
@@ -388,7 +397,9 @@ We found....
     - Animal Services usually only gave a day to complete a case and those cases usually took months to close.
 
     - Winter months tend to have the longest average days open time, while Autumn months have the shortest.
+
 With further time...
+  
     - Overall extremely late responses are spread out throughout the city. There is a significant delay within calls listed as on time. Therefore, we would like to evaluate the amount of time between districts for calls that were considered on time. 
     - Analyze the data further through time series analysis. Some questions that we would like to investigate are:
         - Do days of the week effect when the case was done?
@@ -398,6 +409,7 @@ With further time...
     - Determine priority level for each call as a feature based on the number of days given and department to explore if there is a correlation with the level of delay.
 
 We recommend...
+  
     - The City of San Antonio should create standardized timelines for each department to follow when solving cases.
     - Animal Care Services and Customer Service should both have a thorough review of their cases and timelines to rectify latency issues.
     - Late and extremely late cases should be investigated through all departments.
