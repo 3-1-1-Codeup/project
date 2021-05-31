@@ -415,6 +415,7 @@ We recommend...
 ### 1. Getting started
     - Start by cloning the github repository on your From your terminal command line, type: 
     git clone git@github.com:3-1-1-Codeup/project.git
+  
     - Download .CSV of Data from and name it as service-calls.csv in your working directory:
     https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
     - Use the wrangle.py, explore.py, and model.py to follow the processes we used.
