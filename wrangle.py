@@ -102,7 +102,7 @@ def create_delay_columns(df):
                             bins = [-20.0,0.5,0.75,1.0,15,800],
                             labels = ['Very Early Response', 
                                       'Early Response', "On Time Response", "Late Response", 
-                                      'Very Late Response'])
+                                      'Very Late Response'], right=False)
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)
