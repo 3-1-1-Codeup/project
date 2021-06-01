@@ -364,11 +364,11 @@ Summary of modeling choices...
 - 57.199%
       
 | Model | Accuracy with Train | Accuracy with Validate |
-| ---- | ----| ---- | ---- |
+| ---- | ----| ---- | 
 | Logistic Regression | 61.1% | 61% |
 | Decision Tree | 68% | 68% |
 | Random Forest | 66.6% | 66.4% |
-| KNN | 53.1%  | 53.2 % |
+| KNN | 57%  | 57% |
 | Ridge Classifier | 59% | 59% |
 | SGD Classifier | 56% | 56% |
     
