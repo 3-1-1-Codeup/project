@@ -141,9 +141,10 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Mann-Whitney U 
         - Null: "There is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time." 
         - Reject the null
+
 ### Modeling:
 - Baseline:
-    - 77.2 %
+    -  57.199 %
 - Models Made:
     - Logistic Regression
     - KNN
@@ -153,11 +154,15 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     - Ridge Classifier
     - Ridge CV Classifier
 - Best Model:
-    - 
+    - Decision Tree
 - Model testing:
-    - 
+    - Train
+        - 68 %
+    - Validate
+        - 68 %
 - Performance:
-    - 
+    - Test
+        - 68 %
 
 ***
 
@@ -176,7 +181,6 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
     
 | Attribute | Definition | Data Type |
 | ----- | ----- | ----- | 
-| address | The address or intersection for the reported case/service requested. | object |
 | call_reason | The department division within the City deaprtment to whom the case is assigned. | object |
 | case_status | The status of a case which is either open or closed. | object |
 | case_type | The service request type name for the issue being reported. Examples include stray animals, potholes, overgrown yards, junk vehicles, traffic signal malfunctions, etc. | object |
@@ -187,20 +191,13 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 | dept | The City department to whom the case is assigned. | object |
 | due_date | Every service request type has a due date assigned to the request, based on the request type name. The SLA Date is the due date and time for the request type based on the service level agreement (SLA). Each service request type has a timeframe in which it is scheduled to be addressed. | object |
 | is_late | This indicates whether the case has surpassed its Service Level Agreement due date for the specific service request. | object |
-| latitude | The Y coordinate of the case reported. (longitude) | float64 |
-| *level_of_delay |Level of delay based on days_before_or_after_due | object |
-| longitude | 	The X coordinate of the case reported. (latitude) | float64 |
-| num_of_registered_voters | Number of people registered to vote in that district | int64 | 
 | open_date | The date and time that a case was submitted. | object |
 | open_month | Month of the year the case was made | int64 | 
 | open_week | Week of the year the case was made | int64 | 
 | open_year | The year the case was made | int64 | 
 | pct_time_of_used | How much of the resolution_days_due was the case open? | float64 | 
-| per_capita_income | The income per capita in the district | int64 |
 | resolution_days_due | The number of days between a case being opened and due. | float64 |
 | source_id | The source id is the method of input from which the case was received. | object |
-| square_miles | Square miles in the district | float64 |
-| voter_turnout_2019 | How Many people showed up to vote in 2019 in that district | float64 | 
     
 \*  Indicates the target feature in this City of San Antonio data.
 
@@ -253,7 +250,13 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
   <summary>Click to expand!</summary>
     
 ### Findings:
-- 
+- Each department has better levels of response in certain areas.
+- The departments with the lowest number of calls were more likely to have worse response times
+- Internal requests were generally late in comparison to other forms of reporting. While mobile app was generally completed early.
+- Customer Service generally got issues resolved late or very late.
+- Animal Services usually only gave a day to complete a case and those cases usually took months to close.
+- Winter months tend to have the longest average days open time, while Autumn months have the shortest.
+
 
 ***
 
@@ -268,12 +271,12 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 ### Stats Test 1:
   
 #### Confidence level and alpha value:
-- We established a 95% confidence level through computing the following:
-  - alpha = 1 - confidence, therefore alpha is 0.05
+- 95% confidence
+  - alpha = 0.05
   
 
 - What is the test?
-    - The test used for this hypothesis testing was the ANOVA test.
+    - ANOVA test.
 - Why use this test?
     - The ANOVA test tests the means between many groups to determine if there is a difference.
 - What is being compared?
@@ -288,17 +291,16 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 - Alternative Hypothesis: There is a significant difference in days before or after due date between the districts.
 
 #### Results:
-- We reject the null hypothesis that there is no difference in days before or after due date between the districts.
-- We are able to move forward to explore the alternative hypothesis. 
+- We reject the null hypothesis.
 
 ### Stats Test 2:
     
 #### Confidence level and alpha value:
-- We established a 95% confidence level through computing the following:
-  - alpha = 1 - confidence, therefore alpha is 0.05
+- 95% confidence
+  - alpha = 0.05
     
-- What is the test?
-    - The test used for this hypothesis testing was the Chi$^2$ Test.
+- What
+    - Chi$^2$ Test.
 - Why use this test?
     - This test was used because it compares two categorical data variables.
 - What is being compared?
@@ -312,22 +314,20 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 - Alternative Hypothesis: "The call reason and the level of delay are dependent from one another."
 
 #### Results:
-- We reject the null hypothesis.  The call reason and the level of delay are dependent from one another.
-- We are able to move forward with to explore the alternative hypothesis.
-
+- We reject the null hypothesis.
 
 ### Stats Test 3:
     
 #### Confidence level and alpha value:
-- We established a 95% confidence level through computing the following:
-  - alpha = 1 - confidence, therefore alpha is 0.05
+- 95% confidence
+  - alpha = 0.05
     
 - What is the test?
-    - The test used for this hypothesis testing was the Mann-Whitney U Test.
+    - Mann-Whitney U Test.
 - Why use this test?
     - This test was used because it is used to test whether two samples are likely to derive from the same population .
 - What is being compared?
-    -   Response times between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income.
+    - Response times between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income.
 - Question being asked:
     - Is there a difference for response time for all districts that fall below 20,000 per capita income and those that are above?
     
@@ -337,8 +337,7 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 - Alternative Hypothesis: There is a difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
 
 #### Results:
-- We reject the null hypothesis that there is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time.
-- We are able to move forward with to explore the alternative hypothesis.
+- We reject the null hypothesis
 
 ***
 
@@ -354,29 +353,41 @@ Using data acquired from the City of San Antonio, our team aims to create a clas
 Summary of modeling choices...
         
 ### Models Made:
-- 
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- KNN
+- Ridge Classifier
+- SGD Classifier
 
 ### Baseline Accuracy  
-- 
+- 57.199%
       
 | Model | Accuracy with Train | Accuracy with Validate |
 | ---- | ----| ---- | ---- |
-| Model | Accuracy with Train | Accuracy with Validate |
-| Model | Accuracy with Train | Accuracy with Validate |
+| Logistic Regression | 61.1% | 61% |
+| Decision Tree | 68% | 68% |
+| Random Forest | 66.6% | 66.4% |
+| KNN | 53.1%  | 53.2 % |
+| Ridge Classifier | 59% | 59% |
+| SGD Classifier | 56% | 56% |
     
     
 ## Selecting the Best Model:
 
-- 
+- Decision Tree
 
 - Why did we choose this model?
-    - 
+    - This model ran the best accross train and validate.
+    
+- What does this model do?
+    - Decision trees are flexible models that don’t increase their number of parameters as we add more features (if we build them correctly). At each node of a decision tree, one of the features of our data is evaluated in order to make an specific data point follow a certain path when making a prediction.
 
 ### Model on All Data Sets
 
 | Best Model | Accuracy with Train | Accuracy with Validate | Accuracy with Test|
 | ---- | ----| ---- | ---- |
-| Model | Accuracy with Train | Accuracy with Validate | Accuracy with Test|
+| Decision Tree | 68% | 68% | 68% |
 
 
 ***
@@ -389,38 +400,32 @@ Summary of modeling choices...
 <details>
   <summary>Click to expand!</summary>
 
-We found....
+**We found....**
+
+- Each department is better in certain areas about being on time/early and late in others.
+- The more calls a department had the better they were at getting issues resolved on time.
+- Internal requests were generally late in comparison to other forms of reporting.
+- When an issue was reported via the app, there were no extremely late responses.
+- Customer Service generally got issues resolved late or very late. 
+- Animal Services usually only gave a day to complete a case and those cases usually took months to close.
+- Winter months tend to have the longest average days open time, while Autumn months have the shortest.
+
+**With further time...**
+
+- Overall extremely late responses are spread out throughout the city. There is a significant delay within calls listed as on time. Therefore, we would like to evaluate the amount of time between districts for calls that were considered on time. 
+- Analyze the data further through time series analysis. Some questions that we would like to investigate are:
+    - Do days of the week effect when the case was done?
+    - Are Mondays the slowest days because of the weekend backlog?
+    - Do minor holidays affect response time?
+- Obtain census data to gain insight more into zip codes, neighborhoods, and demographics beyond just the large districts.
+- Determine priority level for each call as a feature based on the number of days given and department to explore if there is a correlation with the level of delay.
+
+**We recommend...**
   
-    - Each department is better in certain areas about being on time/early and late in others.
-
-    - The more calls a department had the better they were at getting issues resolved on time.
-
-    - Internal requests were generally late in comparison to other forms of reporting.
-
-    - When an issue was reported via the app, there were no extremely late responses.
-
-    - Customer Service generally got issues resolved late or very late. 
-
-    - Animal Services usually only gave a day to complete a case and those cases usually took months to close.
-
-    - Winter months tend to have the longest average days open time, while Autumn months have the shortest.
-
-With further time...
-  
-    - Overall extremely late responses are spread out throughout the city. There is a significant delay within calls listed as on time. Therefore, we would like to evaluate the amount of time between districts for calls that were considered on time. 
-    - Analyze the data further through time series analysis. Some questions that we would like to investigate are:
-        - Do days of the week effect when the case was done?
-        - Are Mondays the slowest days because of the weekend backlog?
-        - Do minor holidays affect response time?
-    - Obtain census data to gain insight more into zip codes, neighborhoods, and demographics beyond just the large districts.
-    - Determine priority level for each call as a feature based on the number of days given and department to explore if there is a correlation with the level of delay.
-
-We recommend...
-  
-    - The City of San Antonio should create standardized timelines for each department to follow when solving cases.
-    - Animal Care Services and Customer Service should both have a thorough review of their cases and timelines to rectify latency issues.
-    - Late and extremely late cases should be investigated through all departments.
-    - The classification in the raw data set for whether a case was completed late or not needs to be re-made. This is due to an issue where this feature classifies cases as being late when they were completed as late. For example if a case was due in fifteen days but was completed a day before its due date, it would be classified as late.
+- The City of San Antonio should create standardized timelines for each department to follow when solving cases.
+- Animal Care Services and Customer Service should both have a thorough review of their cases and timelines to rectify latency issues.
+- Late and extremely late cases should be investigated through all departments.
+- The classification in the raw data set for whether a case was completed late or not needs to be re-made. This is due to an issue where this feature classifies cases as being late when they were completed as late. For example if a case was due in fifteen days but was completed a day before its due date, it would be classified as late.
 
 
 </details>  
@@ -434,13 +439,13 @@ We recommend...
   <summary>Click to expand!</summary>
 
 ### 1. Getting started
-    - Start by cloning the github repository on your From your terminal command line, type: 
-    git clone git@github.com:3-1-1-Codeup/project.git
-  
-    - Download .CSV of Data from the link below and name it as service-calls.csv in your working directory:
-    https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
-  
-    - Use the wrangle.py, explore.py, and model.py to follow the processes we used.
+- Start by cloning the github repository on your From your terminal command line, type: 
+git clone git@github.com:3-1-1-Codeup/project.git
+
+- Download .CSV of Data from the link below and name it as service-calls.csv in your working directory:
+https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
+
+- Use the wrangle.py, explore.py, and model.py to follow the processes we used.
     
 Good luck I hope you enjoy your project!
 
