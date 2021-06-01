@@ -50,7 +50,7 @@ def make_source_id_dummies(df):
 
 #-------------------------------
 def keep_info(df):
-    df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay',
+    df.drop(df.columns.difference(['open_date', 'dept','call_reason', 'source_id', 'level_of_delay',
                                    'council_district', 'resolution_days_due', 'district_0', 'district_1', 'district_2',
                                    'district_3', 'district_4','district_5', 'district_6', 'district_7', 'district_8', 
                                    'district_9','district_10']), 1, inplace=True)
@@ -65,6 +65,7 @@ def model_df():
     df= dummy_dept(df)
     df= dummy_call_reason(df)
     df= make_source_id_dummies(df)
+    df= extract_time(df)
 
     return df
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +106,7 @@ def scale_data(X_train, X_validate, X_test):
     '''
     
     
-    obj_col = ['dept', 'call_reason','source_id']
+    obj_col = ['open_date', 'dept', 'call_reason','source_id']
     num_train = X_train.drop(columns = obj_col)
     num_validate = X_validate.drop(columns = obj_col)
     num_test = X_test.drop(columns = obj_col)
@@ -151,3 +152,25 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
     
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
+
+
+#------------------------------------
+
+def extract_time(df):
+    '''
+    This function will take in a dataframe and return it with new features extracted from the open_date column
+    - open_month: which month the case was opened in
+    - open_year: which year the case was opened in
+    - open_week: which week the case was opened in
+    '''
+    
+    # extract month from open_date
+    df['open_month'] = df.open_date.dt.month
+    
+    # extract year from open_date
+    df['open_year'] = df.open_date.dt.year
+    
+    # extract week from open_date
+    df['open_week'] = df.open_date.dt.week
+    
+    return df
