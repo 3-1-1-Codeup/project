@@ -94,6 +94,8 @@ def create_delay_columns(df):
     # replace null values in days open with 0
     df['days_open'] = df['days_open'].fillna(0)
     # add 1 to resolution days to offset future issues with upcoming feature
+    df['days_open'] = df['days_open'] + 1
+    # add 1 to resolution days to offset future issues with upcoming feature
     df['resolution_days_due'] = df['resolution_days_due'] + 1
     # create new feature to show how long it took to resolve compared to resolution due date
     df['pct_time_of_used'] = df.days_open / df.resolution_days_due
