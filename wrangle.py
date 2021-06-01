@@ -24,6 +24,7 @@ def get_311_data():
     from: https://data.sanantonio.gov/dataset/service-calls/resource/20eb6d22-7eac-425a-85c1-fdb365fd3cd7
     after the .csv is read in, it returns it as a data frame.
     '''
+    # read csv
     df= pd.read_csv('service_calls.csv')
     return df
 #-----------------------------------------------------------------------------
@@ -185,6 +186,7 @@ def clean_column_names(df):
     '''This function reads in a dataframe as a positional argument, makes the column names easier to call and
     more python friendly. It also extracts the zip code from the address column. It then returns a cleaned data 
     frame.'''
+    # renaming the following columns
     df= df.rename(columns={
                     'Category':'category', 'OPENEDDATETIME':'open_date', 'Dept': 'dept',
                     'SLA_Date':'due_date', 'CLOSEDDATETIME': 'closed_date', 'Late (Yes/No)': 'is_late',
@@ -193,6 +195,7 @@ def clean_column_names(df):
                     'CaseStatus': 'case_status', 'SourceID':'source_id', 'XCOORD': 'longitude', 'YCOORD': 'latitude',
                     'Report Starting Date': 'report_start_date', 'Report Ending Date': 'report_end_date'
                       })
+    # extract zipcode from address
     df['zipcode'] = df['address'].str.extract(r'.*(\d{5}?)$')  
     #drop zipcode nulls after obtaining zipcode
     df.dropna(subset=['zipcode'], how='all', inplace=True)         
@@ -229,12 +232,15 @@ def split(df, stratify_by= 'level_of_delay'):
     Crude train, validate, test split
     To stratify, send in a column name
     """
+    # split if stratified by non
     if stratify_by == None:
         train, test = train_test_split(df, test_size=.2, random_state=319)
         train, validate = train_test_split(train, test_size=.3, random_state=319)
+    # spilt if it is stratified
     else:
         train, test = train_test_split(df, test_size=.2, random_state=319, stratify=df[stratify_by])
         train, validate = train_test_split(train, test_size=.3, random_state=319, stratify=train[stratify_by])
+    # return train, validate, and test
     return train, validate, test
 
 # Create X_train, y_train, etc...~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,13 +250,16 @@ def separate_y(train, validate, test):
     This function will take the train, validate, and test dataframes and separate the target variable into its
     own panda series
     '''
-    
+    # Split into x and y train
     X_train = train.drop(columns=['level_of_delay'])
     y_train = train.level_of_delay
+    # spilt into x and y validate
     X_validate = validate.drop(columns=['level_of_delay'])
     y_validate = validate.level_of_delay
+    # split into x and y test
     X_test = test.drop(columns=['level_of_delay'])
     y_test = test.level_of_delay
+    # return x and y values
     return X_train, y_train, X_validate, y_validate, X_test, y_test
 
 # Scale the data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -260,30 +269,24 @@ def scale_data(X_train, X_validate, X_test):
     This function will scale numeric data using Min Max transform after 
     it has already been split into train, validate, and test.
     '''
-    
-    
+    # set object columns to drop
     obj_col = ['open_date', 'due_date', 'closed_date', 'is_late', 'dept', 'call_reason', 'case_type', 'case_status', 'source_id', 'address', 'zipcode']
+    # drop object columns from X train, validate, and test
     num_train = X_train.drop(columns = obj_col)
     num_validate = X_validate.drop(columns = obj_col)
     num_test = X_test.drop(columns = obj_col)
-    
-    
     # Make the thing
     scaler = sklearn.preprocessing.MinMaxScaler()
-    
-   
     # we only .fit on the training data
     scaler.fit(num_train)
     train_scaled = scaler.transform(num_train)
     validate_scaled = scaler.transform(num_validate)
     test_scaled = scaler.transform(num_test)
-    
     # turn the numpy arrays into dataframes
     train_scaled = pd.DataFrame(train_scaled, columns=num_train.columns)
     validate_scaled = pd.DataFrame(validate_scaled, columns=num_train.columns)
     test_scaled = pd.DataFrame(test_scaled, columns=num_train.columns)
-    
-    
+    # return scaled data
     return train_scaled, validate_scaled, test_scaled
 
 # Combo Train & Scale Function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -296,17 +299,13 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
     then it will scale the numeric variables in train, validate, and test
     finally it will return all dataframes individually
     '''
-    
     # split data into train, validate, test
     train, validate, test = split(df, stratify_by= 'level_of_delay')
-    
      # seperate target variable
     X_train, y_train, X_validate, y_validate, X_test, y_test = separate_y(train, validate, test)
-    
-    
     # scale numeric variable
     train_scaled, validate_scaled, test_scaled = scale_data(X_train, X_validate, X_test)
-    
+    # return all
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test, train_scaled, validate_scaled, test_scaled
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
@@ -332,16 +331,12 @@ def extract_time(df):
     - open_year: which year the case was opened in
     - open_week: which week the case was opened in
     '''
-    
     # extract month from open_date
     df['open_month'] = df.open_date.dt.month
-    
     # extract year from open_date
     df['open_year'] = df.open_date.dt.year
-    
     # extract week from open_date
     df['open_week'] = df.open_date.dt.week
-    
     return df
     
 #------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,6 +344,7 @@ def find_voter_info(df):
     '''This function reads in a dataframe. Using the Council District column, it appends the voter turn out and
     number of registered voters for each district. It does NOT take into account district 0 due to that being a
     filler district for outside jurisdictions. It then appends the info onto the dataframe and returns it for later use.'''
+    # set conditions for each council district
     conditions = [
     (df['Council District'] == 1),
     (df['Council District'] == 2), 
@@ -367,6 +363,7 @@ def find_voter_info(df):
     # create a new column and use np.select to assign values to it using our lists as arguments
     df['voter_turnout_2019'] = np.select(conditions, voter_turnout)
     df['num_of_registered_voters'] = np.select(conditions, registered_voters)
+    # return df
     return df
 #------------------------------------------------------------------------------------------------------------------------------------------
 def add_per_cap_in(df):
@@ -381,6 +378,7 @@ def add_per_cap_in(df):
     per_cap_in = pd.DataFrame(list(per_cap_in.items()),columns = ['council_district','per_capita_income'])
     #Merging with the original dataframe
     df = df.merge(per_cap_in, on = 'council_district', how ='left')
+    # return df
     return df
 #------------------------------------------------------------------------------------------------------------------------------------------
 # clean the whole df
