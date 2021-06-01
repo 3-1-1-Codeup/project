@@ -19,7 +19,8 @@ To prepare our data we:
     - The target variable which is level of delay measures if a case is resolved very early, early, on time, late or very late. 
     - This was done through binning the comparison of the amount of days used to the amount of days allotted for a case to be completed.
     
-    - The last step of our prepare was to split the data using SKLearn into train, validate and test data sets. In order to be prepared for modeling, we dropped our object columns, scaled the numeric data using the SKLearn Preprocessing MinMax scaler, and split the data into X/Y data sets. 
+    - The last step of our prepare was to split the data using SKLearn into train, validate and test data sets. 
+    - In order to be prepared for modeling, we dropped our object columns, scaled the numeric data using the SKLearn Preprocessing MinMax scaler, and split the data into X/Y data sets. 
     
  # Click
 The next step in the pipeline we used was explore:
