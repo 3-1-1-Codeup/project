@@ -27,7 +27,9 @@ To prepare our data we:
 The next step in the pipeline we used was to explore:
 
 
-    We explored the train data by making univariate plots of zip code, days open, resolution days dues, days before and after due,  city council district, and the target variable of the level of delay. 
+    We explored the train data by making univariate plots of zip code, days open, resolution days dues, days before and after due, 
+    city council district, and the target variable of the level of delay. 
+    
     Key findings from our univariate testing were:
       - Districts 1, 2, 3, & 5 have higher reports
       - District 0, 8, and 9 have far fewer early responses
@@ -41,6 +43,8 @@ The next step in the pipeline we used was to explore:
 	    - the department with the most issues with the level of delay was the customer service department. 
 # Click
 ### Explore # 3
-    We also ran statistical tests on our hypothesis questions. We ran three different hypothesis tests which were the ANOVA test, Chi2 test, and Mann-Whitney U test. In all three tests, we were able to reject our null hypotheses and able to move forward in our investigation of our alternative hypotheses.
+   - We also ran statistical tests on our hypothesis questions. 
+   - We ran three different hypothesis tests which were the ANOVA test, Chi2 test, and Mann-Whitney U test. 
+   - In all three tests, we were able to reject our null hypotheses and able to move forward in our investigation of our alternative hypotheses.
 
 I am now going to pass the next stage of exploration to Sam.
