@@ -19,6 +19,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~mann whitney testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def upper_lower_mw_testing(train):
+    '''This function takes in the train data set, runs a mann whitney u statistical test on districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time. It then returns the result of the statistical test.'''
     null_hypothesis="there is no difference between districts that fall below 20,000 per capita income and districts that fall above 20,000 per capita income response time."
     district_2 = train[train['council_district'] == 2]
     n = train.shape[0]     # number of observations
@@ -39,6 +40,7 @@ def upper_lower_mw_testing(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Pearson R Coefficient Testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def days_due_response_prc_testing(train):
+    '''This function takes in the train data set, runs a pearson r coefficient statistical testing and returns the result of the statistical test.'''
     null_hypothesis = "There is no correlation between days until due date and response time."
     corr, p = stats.pearsonr(train.resolution_days_due, train.days_before_or_after_due)
     if p > α:
@@ -50,6 +52,7 @@ def days_due_response_prc_testing(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~anova testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def dbad_anova_test(train):
+    '''This'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
