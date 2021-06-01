@@ -1,9 +1,13 @@
 Thank you Caitlin.
+
+
 We began with acquire:
+
     - We obtained our main data from the City of San Antonioopen data sets. We chose the 3-1-1 department logs because we wanted to ensure that everyone throughout San Antonio has an equal opportunity for solving the case in a timely manner.
     -  We also got supplemental data regarding the demographics of each district from the San Antonio 2020 website. The reason we chose this website is because the Department of Planning and Community Development published the site as a summary report of the demographic distributions of San Antonio using the US Census Bureau results.
 
-    - To prepare our data we:
+To prepare our data we:
+    
     	- merged some data variables from reasons to calling to prevent misclassification and made case status a boolean variable. 
 	- We also made new features, created the target variable level_of_delay, handled the null values and dropped any duplicated or unnecessary features.
 	- Finally, we changed feature names to be easier to understand.
