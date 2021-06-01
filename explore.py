@@ -530,6 +530,7 @@ def create_call_reason_df(df):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_days_bad_relplot(train):
+    '''This function creates a relplot from the train data set for days before or after due.'''
     plt.figure(figsize=(20, 10))
     sns.relplot(x='case_id', y='days_before_or_after_due', col= 'source_id', hue='dept', data=train)
     plt.xlabel("Case ID")
@@ -540,6 +541,7 @@ def make_days_bad_relplot(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_avg_days_by_dept(train):
+    '''This function creates a relplot from the train data set for average days open by department.'''
     plt.figure(figsize=(20, 10))
     sns.relplot(x='case_id', y='days_open', col= 'dept', hue='is_late', data=train)
     plt.xlabel("Case ID")
@@ -550,6 +552,7 @@ def make_avg_days_by_dept(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_isLate(train):
+    '''This function makes a stripplot for is late from the train data set.'''
     plt.figure(figsize=(20, 10))
     sns.stripplot(x="dept", y="case_id", hue='is_late', data=train, jitter=0.05)
     plt.xlabel("Department")
@@ -558,6 +561,7 @@ def make_isLate(train):
     return plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def dummy_dept(df):
+    '''This function accepts a dataframe, makes dummy variables of the departments and concatenates them to the dataframe.'''
     # dummy dept feature
     dummy_df =  pd.get_dummies(df['dept'])
     # Name the new columns
