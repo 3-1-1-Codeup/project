@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import wrangle
+
 import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -50,7 +51,7 @@ def make_source_id_dummies(df):
 
 #-------------------------------
 def keep_info(df):
-    df.drop(df.columns.difference(['dept','call_reason', 'source_id', 'level_of_delay',
+    df.drop(df.columns.difference(['open_date', 'dept','call_reason', 'source_id', 'level_of_delay',
                                    'council_district', 'resolution_days_due', 'district_0', 'district_1', 'district_2',
                                    'district_3', 'district_4','district_5', 'district_6', 'district_7', 'district_8', 
                                    'district_9','district_10']), 1, inplace=True)
@@ -65,6 +66,7 @@ def model_df():
     df= dummy_dept(df)
     df= dummy_call_reason(df)
     df= make_source_id_dummies(df)
+    df= extract_time(df)
 
     return df
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,14 +107,14 @@ def scale_data(X_train, X_validate, X_test):
     '''
     
     
-    obj_col = ['open_date', 'due_date', 'closed_date', 'is_late', 'dept', 'call_reason', 'case_type', 'case_status', 'source_id', 'address', 'council_district', 'longitude', 'latitude', 'zipcode', 'days_before_or_after_due', 'pct_time_of_used', 'days_open']
+    obj_col = ['dept', 'call_reason','source_id', 'open_date']
     num_train = X_train.drop(columns = obj_col)
     num_validate = X_validate.drop(columns = obj_col)
     num_test = X_test.drop(columns = obj_col)
     
     
     # Make the thing
-    scaler = sklearn.preprocessing.MinMaxScaler()
+    scaler = preprocessing.MinMaxScaler()
     
    
     # we only .fit on the training data
@@ -154,22 +156,21 @@ def split_separate_scale(df, stratify_by= 'level_of_delay'):
 
 #------------------------------------
 
-def create_model_df(df):
-    
+def extract_time(df):
     '''
-    This function will take in a cleaned dataframe and return a dataframe prepared for numeric based modeling
+    This function will take in a dataframe and return it with new features extracted from the open_date column
+    - open_month: which month the case was opened in
+    - open_year: which year the case was opened in
+    - open_week: which week the case was opened in
     '''
     
-    # only keep chosen variable
-    model_df = keep_info(df)
+    # extract month from open_date
+    df['open_month'] = df.open_date.dt.month
     
-    # make dummies of chosen variables
-    model_df = dummy_dept(model_df)
-    model_df = make_source_id_dummies(model_df)
-    model_f = dummy_call_reason(model_df)
-    model_df = create_dummies(model_df)
+    # extract year from open_date
+    df['open_year'] = df.open_date.dt.year
     
-    # drop categorical columns once they've been dummied
-    model_df = model_df.drop(columns = ['dept', 'call_reason', 'council_district', 'source_id'])
+    # extract week from open_date
+    df['open_week'] = df.open_date.dt.week
     
-    return model_df
+    return df
