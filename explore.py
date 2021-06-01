@@ -52,7 +52,7 @@ def days_due_response_prc_testing(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~anova testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def dbad_anova_test(train):
-    '''This'''
+    '''This function takes in the train data set, runs ANOVA statistical testing and returns the result of the statistical test.'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
@@ -79,6 +79,7 @@ def dbad_anova_test(train):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def days_open_by_month_anova_test(train):
+    '''This function takes in the train data set, runs ANOVA statistical testing and returns the result of the statistical test.'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
@@ -104,6 +105,7 @@ def days_open_by_month_anova_test(train):
         return print("We reject the null hypothesis that", null_hypothesis)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def days_open_by_week_anova_test(train):
+    '''This function takes in the train data set, runs ANOVA statistical testing and returns the result of the statistical test.'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
@@ -171,6 +173,7 @@ def days_open_by_week_anova_test(train):
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def days_open_by_district_anova_test(train):
+    '''This function takes in the train data set, runs a ANOVA statistical testing and returns the result of the statistical test.'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
@@ -269,6 +272,7 @@ def by_dept_chi_square(train):
         return print("We reject the null hypothesis that", null_hypothesis)        
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def by_district_chi_square(train):
+    '''This function takes in the train data set, runs a chi squared statistical testing and returns the result of the statistical test.'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
@@ -310,6 +314,7 @@ def chi2(df, variable, target, alpha=0.05):
         print('There is insufficient evidence to reject the null hypothesis')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~T- Tests~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def january_t_test(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     H0 = 'there is no difference in days a case is open between month 1 and the rest of the population'
     H1 = 'there is a significant difference between the days a case is open between month 1 and the general population'
     alpha = .05
@@ -330,6 +335,7 @@ def january_t_test(train):
         print(H0)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def february_t_test(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     H0 = 'there is no difference in days a case is open between month 2 and the rest of the population'
     H1 = 'there is a significant difference between the days a case is open between month 2 and the general population'
     alpha = .05
@@ -351,6 +357,7 @@ def february_t_test(train):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def march_t_test(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     H0 = 'there is no difference in days a case is open between month 3 and the rest of the population'
     H1 = 'there is a significant difference between the days a case is open between month 3 and the general population'
     alpha = .05
@@ -371,6 +378,7 @@ def march_t_test(train):
         print(H0)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def december_t_test(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     H0 = 'there is no difference in days a case is open between month 12 and the rest of the population'
     H1 = 'there is a significant difference between the days a case is open between month 12 and the general population'
     alpha = .05
@@ -392,6 +400,7 @@ def december_t_test(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def district_2_days_open_t_test(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     H0 = 'there is no difference in days a case is open between district 2 and the rest of the population'
     H1 = 'there is a significant difference between the days a case is open between district 2 and the general population'
     alpha = .05
@@ -411,6 +420,7 @@ def district_2_days_open_t_test(train):
         print(H0)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def district_3_days_open(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     H0 = 'there is no difference in days a case is open between district 3 and the rest of the population'
     H1 = 'there is a significant difference between the days a case is open between district 3 and the general population'
     alpha = .05
@@ -431,6 +441,7 @@ def district_3_days_open(train):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def registered_voters_t_test(train):
+    '''This function takes in the train data set, runs a t test statistical testing and returns the result of the statistical test.'''
     n = train.shape[0]     # number of observations
     degf = n - 2        # degrees of freedom: the # of values in the final calculation of a statistic that are free to vary.
     conf_interval = .95 # desired confidence interval
