@@ -40,10 +40,5 @@ Thank you, Caitlin.
     - Key findings from our bivariate testing were:
 	    - each department has certain cases and areas where they perform well but then their timeliness drops in other areas.
 	    - the department with the most issues with the level of delay was the customer service department. 
-# Click
-### Explore # 3
-   - We also ran statistical tests on our hypothesis questions. 
-   - We ran three different hypothesis tests which were the ANOVA test, Chi2 test, and Mann-Whitney U test. 
-   - In all three tests, we were able to reject our null hypotheses and able to move forward in our investigation of our alternative hypotheses.
 
 I am now going to pass the next stage of exploration to Sam.
