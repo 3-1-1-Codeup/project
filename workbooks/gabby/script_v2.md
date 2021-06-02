@@ -1,5 +1,12 @@
-c distributions of San Antonio using the US Census Bureau results.
-    
+Thank you, Caitlin.
+### Acquire
+We began with acquiring:
+
+We obtained our main data from the City of San Antonio open data sets.
+We chose the 3-1-1 department logs because we wanted to ensure that everyone throughout San Antonio has an equal opportunity for having their case solved on time.
+We also got supplemental data regarding the demographics of each district from the San Antonio 2020 website.
+The reason we chose this website as a data source is that the Department of Planning and Community Development published the site as a summary report of the demographic distributions of San Antonio using the US Census Bureau results.
+
 # CLICK 
 ### Prepare
 - To prepare our data we:
