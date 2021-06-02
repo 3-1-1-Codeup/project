@@ -14,7 +14,7 @@ We began with acquiring:
     - merged some data variables from reasons to calling to prevent misclassification and made case status a boolean variable. 
     - We also made new features, created the target variable level_of_delay
     	- The target variable is the level of delay measures if a case is resolved very early, early, on time, late, or very late. 
-    - , handled the null values, and dropped any duplicated or unnecessary features.
+    - We handled the null values, and dropped any duplicated or unnecessary features.
     - Finally, we changed feature names to be easier to understand.
   
     - This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
@@ -40,8 +40,14 @@ We began with acquiring:
         - but this is because they have called far fewer calls compared to all other districts
 # Click 
 ### Explore # 2
-    - Introduce departments
-    
+    - The departments for the City of San Antonio are Solid Waste Management, Development Services, Animal Care Services, 
+    Trans & Capital improvements, customer service, metro health, code enforcement services and parks/rec.
+    - Overall the average amount of calls is 39,645 for all departments combined
+    - The department with the most calls is the Solid Waste Management which handles trash related calls.
+    - The department with the least amount of calls is parks and rec which maintains the city parks.
+    - Key findings from exploring departments were:
+        -  each department has certain cases and areas where they perform well but then their timeliness drops in other areas.
+        - the department with the most issues with the level of delay was the customer service department. 
 
 I am now going to pass the next stage of exploration to Sam.
 
