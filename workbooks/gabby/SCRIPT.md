@@ -42,3 +42,28 @@ Thank you, Caitlin.
 	    - the department with the most issues with the level of delay was the customer service department. 
 
 I am now going to pass the next stage of exploration to Sam.
+
+
+
+review panel #1 feedback:
+- why this matters
+- tools used on slide
+- bool to boolean 
+- adding level of delay rather than target variable
+- adding we drop unnecessary columns
+- too much for a presentation
+- 1. very early response is most prevalent bar chart for one type of response highlighted
+- title to be what we get out of it
+- 2. only shows very late response by district with each color with average line 
+- Title: Does the “very-late response” vary by the district?
+- 3. only very early with mean by district to compare to very late
+
+
+remove legend 
+label at the axis
+make chart larger
+font bigger
+customer service takes the longest
+title should be the header of the slide
+make contrasting colors
+arrow
