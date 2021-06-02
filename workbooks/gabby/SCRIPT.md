@@ -13,9 +13,11 @@ Thank you, Caitlin.
 - To prepare our data we:
     
     - merged some data variables from reasons to calling to prevent misclassification and made case status a boolean variable. 
-    - We also made new features, created the target variable level_of_delay, handled the null values, and dropped any duplicated or unnecessary features.
+    - We also made new features, created the target variable level_of_delay
+    	- The target variable is the level of delay measures if a case is resolved very early, early, on time, late, or very late. 
+    - , handled the null values, and dropped any duplicated or unnecessary features.
     - Finally, we changed feature names to be easier to understand.
-    - The target variable is the level of delay measures if a case is resolved very early, early, on time, late, or very late. 
+  
     - This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
     
     - The last step of our preparation was to split the data using SKLearn into the train, validate and test data sets. 
