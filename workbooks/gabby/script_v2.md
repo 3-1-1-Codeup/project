@@ -34,14 +34,14 @@ We began with acquiring:
 
     - This photo taken from https://sa2020.org/city-council-profiles
     - There are 10 districts in San Antonio
-    - Districts 1 and 5 along with part of 7 make up urban core.
-    - District 2 makes up the east side and district 6 makes up the west side.
+    - Districts 1 and 5 along with a small portion of 7 make up the urban core.
+    - District 2 and a portion of 10 makes up the east side and district 6 and a portion of 7 makes up the west side.
     - Districts 3 and 4 make up the South Side of San Antonio
-    - Part of district 7, all of districts 8-10 make up the North side.
+    - Part of district 7 and 10 all of districts 8 and 9 make up the North side.
     - Some key findings about our districts are:
       - Districts 1, 2, 3, & 5 have a  higher amount of reports
-      - District 0, 8, and 9 have far fewer early responses
-        - but this is because they have called far fewer calls compared to all other districts
+      - District 8, and 9 have far fewer early responses
+        - We attribute this to them having fewer calls compared to all other districts
 # Click 
 ### Explore # 2
    - The departments for the City of San Antonio are Solid Waste Management, Development Services, Animal Care Services, 
