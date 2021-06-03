@@ -27,9 +27,7 @@ We began with acquiring:
  ### Explore #1
 - The next step in the pipeline we used was to explore:
 
-
-    - Introduce districts
-    - This photo taken frmo https://sa2020.org/city-council-profiles
+    - This photo taken from https://sa2020.org/city-council-profiles
     - There are 10 districts in San Antonio
     - Districts 1 and 5 along with part of 7 make up urban core.
     - District 2 makes up the east side and district 6 makes up the west side.
@@ -41,28 +39,14 @@ We began with acquiring:
         - but this is because they have called far fewer calls compared to all other districts
 # Click 
 ### Explore # 2
-    - The departments for the City of San Antonio are Solid Waste Management, Development Services, Animal Care Services, 
-    Trans & Capital improvements, customer service, metro health, code enforcement services and parks/rec.
-    - Overall the average amount of calls is 39,645 for all departments combined
-    - The department with the most calls is the Solid Waste Management which handles trash related calls.
-    - The department with the least amount of calls is parks and rec which maintains the city parks.
-    - Key findings from exploring departments were:
+   - The departments for the City of San Antonio are Solid Waste Management, Development Services, Animal Care Services, 
+Trans & Capital improvements, customer service, metro health, code enforcement services and parks/rec.
+   - Overall the average amount of calls is 39,645 for all departments combined
+   - The department with the most calls is the Solid Waste Management which handles trash related calls.
+   - The department with the least amount of calls is parks and rec which maintains the city parks.
+   - Key findings from exploring departments were:
         -  each department has certain cases and areas where they perform well but then their timeliness drops in other areas.
         - the department with the most issues with the level of delay was the customer service department. 
 
 I am now going to pass the next stage of exploration to Sam.
 
-
-
-review panel #1 feedback:
-- why this matters
-- tools used on slide
-- bool to boolean 
-- adding level of delay rather than target variable
-- adding we drop unnecessary columns
-- too much for a presentation
-- 1. very early response is most prevalent bar chart for one type of response highlighted
-- title to be what we get out of it
-- 2. only shows very late response by district with each color with average line 
-- Title: Does the “very-late response” vary by the district?
-- 3. only very early with mean by district to compare to very late
