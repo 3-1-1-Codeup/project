@@ -14,11 +14,12 @@ We began with acquiring:
     - merged some data variables from reasons to calling to prevent misclassification and made case status a boolean variable. 
     - We also made new features, created the target variable level_of_delay
     	- The target variable is the level of delay measures if a case is resolved very early, early, on time, late, or very late. 
+    	- This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
+    
     - We handled the null values, and dropped any duplicated or unnecessary features.
     - Finally, we changed feature names to be easier to understand.
   
-    - This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
-    
+
     - The last step of our preparation was to split the data using SKLearn into the train, validate and test data sets. 
     - To be prepared for modeling, we dropped our object columns, scaled the numeric data using the SKLearn Preprocessing MinMax scaler, and split the data into X/Y data sets. 
     
