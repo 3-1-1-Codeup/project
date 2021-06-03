@@ -6,6 +6,11 @@ We began with acquiring:
 - We chose the 3-1-1 department logs because we wanted to ensure that everyone throughout San Antonio has an equal opportunity for having their case solved on time.
 - We also got supplemental data regarding the demographics of each district from the San Antonio 2020 website.
 - The reason we chose this website as a data source is that the Department of Planning and Community Development published the site as a summary report of the demographic distributions of San Antonio using the US Census Bureau results.
+- WHY DO WE CARE?
+- Imagine there is an aggressive loose dog on your street and you are unable to leave your house without being attacked.
+- You call 3-1-1 and they say they will come pick up the dog.
+- But it's been days and the dog is still there.
+- So you start to wonder, is it an issue on just my side of town or is just a department response time issue?
 
 # CLICK 
 ### Prepare
