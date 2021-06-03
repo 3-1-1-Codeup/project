@@ -6,11 +6,11 @@ We began with acquiring:
 - We chose the 3-1-1 department logs because we wanted to ensure that everyone throughout San Antonio has an equal opportunity for having their case solved on time.
 - We also got supplemental data regarding the demographics of each district from the San Antonio 2020 website.
 - The reason we chose this website as a data source is that the Department of Planning and Community Development published the site as a summary report of the demographic distributions of San Antonio using the US Census Bureau results.
-- WHY DO WE CARE?
+- You may be wondering why did we choose this topic?
 - Imagine there is an aggressive loose dog on your street and you are unable to leave your house without being attacked.
 - You call 3-1-1 and they say they will come pick up the dog.
-- But it's been days and the dog is still there.
-- So you start to wonder, is it an issue on just my side of town or is just a department response time issue?
+- But hours turn into days and the dog is still there.
+- So you start to wonder, is timeliness an issue on just my side of town or is a department issue?
 
 # CLICK 
 ### Prepare
@@ -46,9 +46,8 @@ We began with acquiring:
 ### Explore # 2
    - The departments for the City of San Antonio are Solid Waste Management, Development Services, Animal Care Services, 
 Trans & Capital improvements, customer service, metro health, code enforcement services and parks/rec.
-   - Overall the average amount of calls is 39,645 for all departments combined
    - The department with the most calls is the Solid Waste Management which handles trash related calls.
-   - The department with the least amount of calls is parks and rec which maintains the city parks.
+   - The department with the least amount of calls is parks and rec, customer service, and metro health.
    - Key findings from exploring departments were:
         -  each department has certain cases and areas where they perform well but then their timeliness drops in other areas.
         - the department with the most issues with the level of delay was the customer service department. 
