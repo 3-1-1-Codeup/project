@@ -47,7 +47,7 @@ We began with acquiring:
    - The departments for the City of San Antonio are Solid Waste Management, Development Services, Animal Care Services, 
 Trans & Capital improvements, customer service, metro health, code enforcement services and parks/rec.
    - The department with the most calls is the Solid Waste Management which handles trash related calls.
-   - The department with the least amount of calls is parks and rec, customer service, and metro health.
+   - The departments with the least amount of calls are parks and rec, customer service, and metro health.
    - Key findings from exploring departments were:
         -  each department has certain cases and areas where they perform well but then their timeliness drops in other areas.
         - the department with the most issues with the level of delay was the customer service department. 
