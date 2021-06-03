@@ -5,7 +5,7 @@ We began with acquiring:
 - We obtained our main data from the City of San Antonio open data sets.
 - We chose the 3-1-1 department logs because we wanted to ensure that everyone throughout San Antonio has an equal opportunity for having their case solved on time.
 - We also got supplemental data regarding the demographics of each district from the San Antonio 2020 website.
-- The reason we chose this website as a data source is that the Department of Planning and Community Development published the site as a summary report of the demographic distributions of San Antonio using the US Census Bureau results.
+- The reason we chose this website as a data source is because the Department of Planning and Community Development published the site as a summary report of the demographic distributions of San Antonio using the US Census Bureau results.
 
 
 # CLICK 
@@ -13,15 +13,15 @@ We began with acquiring:
 - Imagine there is an aggressive loose dog on your street and you are unable to leave your house without being attacked.
 - You call 3-1-1 and they say they will come pick up the dog.
 - But hours turn into days and the dog is still there.
-- So you start to wonder, is timeliness an issue on just my side of town or is a department issue?
+- So you start to wonder, is timeliness an issue on a departmental level or is it just my side of town?
 
 # CLICK 
 ### Prepare
 - To prepare our data we:
     
-    - merged some data variables from reasons to calling to prevent misclassification and made case status a boolean variable. 
-    - We also made new features, created the target variable level_of_delay
-    	- The target variable is the level of delay measures if a case is resolved very early, early, on time, late, or very late. 
+    - merged some data variables prevent misclassification and made case status a boolean variable. 
+    - We also made new features and created the target variable which is level_of_delay
+    	- The target variable, level of delay, measures if a case is resolved very early, early, on time, late, or very late. 
     	- This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
     
     - We handled the null values, and dropped any duplicated or unnecessary features.
