@@ -33,9 +33,8 @@ We began with acquiring:
     
  # Click
  ### Explore #1
-- The next step in the pipeline we used was to explore:
+- The next step in the pipeline we used was explore:
 
-    - This photo taken from https://sa2020.org/city-council-profiles
     - There are 10 districts in San Antonio
     - Districts 1 and 5 along with a small portion of 7 make up the urban core.
     - District 2 and a portion of 10 makes up the east side and district 6 and a portion of 7 makes up the west side.
