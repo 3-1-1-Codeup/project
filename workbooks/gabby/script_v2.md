@@ -20,7 +20,7 @@ Thank you, Caitlin.
     
     - merged some data variables prevent misclassification and made case status a boolean variable. 
     - We also made new features and created the target variable which is level_of_delay
-    	- The target variable, level of delay, measures if a case is resolved very early, early, on time, late, or very late. 
+    	- Level of delay, measures if a case is resolved very early, early, on time, late, or very late. 
     	- This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
     
     - We handled the null values, and dropped any duplicated or unnecessary features.
