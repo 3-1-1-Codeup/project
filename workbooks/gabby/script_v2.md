@@ -51,7 +51,7 @@ Trans & Capital improvements, customer service, metro health, code enforcement s
    - The departments with the least amount of calls are parks and rec, customer service, and metro health.
    - Key findings from exploring departments were:
         -  each department has certain cases and areas where they perform well but then their timeliness drops in other areas.
-        - the department with the most issues with the level of delay was the customer service department. 
+        - the department with the most issues with the level of delay is the customer service department. 
 
 I am now going to pass the next stage of exploration to Sam.
 
