@@ -23,10 +23,8 @@ Thank you, Caitlin.
     	- Level of delay, measures if a case is resolved very early, early, on time, late, or very late. 
     	- This was done through binning the comparison of the number of days used to the number of days allotted for a case to be completed.
     
-    - We handled the null values, and dropped any duplicated or unnecessary features.
+    - We handled the null values, and dropped any duplicated or unnecessary variables
     - We then changed feature names to be easier to understand.
-  
-
     - The last step of our preparation was to split the data using SKLearn into the train, validate and test data sets. 
     - Then for modeling, we dropped our object columns, scaled the numeric data using the SKLearn Preprocessing MinMax scaler, and split the data into X/Y data sets. 
     
