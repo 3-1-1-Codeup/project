@@ -854,3 +854,10 @@ def plot_dept_resolution_days(train):
     # show just the plot
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def avg_days_by_district(train):
+    district_df = create_district_df(train)
+    plt.subplots(figsize=(22, 6))
+    sns.set_theme(style="darkgrid")
+    sns.barplot(data = district_df, x = 'council_district', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due')
+    plt.xlabel('District')
+    plt.ylabel('Average Response Time')
