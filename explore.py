@@ -711,4 +711,24 @@ def dbad_avg_plot(train):
     sns.barplot(data = dept_df, x = 'dept', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due Date by Department')
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def resolution_days_due_vs_days_before_or_after_due(train):
+    '''
+    This function will take in the train dataframe from the City of San Antonio 311 Data
+    and return a graph dipicting the linear relationship between how many days a case is 
+    given to be resolved and how many days the case is early or late
+    '''
+    plot = sns.relplot(data = train, x = 'resolution_days_due', y = 'days_before_or_after_due', hue = 'council_district', palette= 'Dark2')
+    plot.set(xlim=(0, 100))
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def sa_map(train):
+    '''
+    This function will take in the train dataframe from the City of San Antoniot 311 data
+    and return a crude map of the city by making data points using geospatial coordinates 
+    of 311 cases provided by the city
+    '''
+    sns.histplot(data = train, x = 'longitude', y ='latitude', hue = 'council_district', palette= 'Dark2')
+    plt.xticks(rotation = 45)
+    plt.tight_layout()
+    plt.show()
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
