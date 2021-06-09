@@ -1,9 +1,19 @@
 import pandas as pd
 import numpy as np
+import os
+
+from pydataset import data
+from datetime import date 
+from scipy import stats
+
+# turn off pink warning boxes
+import warnings
+warnings.filterwarnings("ignore")
+
+import sklearn
+
 from sklearn.model_selection import train_test_split
-import sklearn.preprocessing
-import seaborn as sns
-import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
 
 
 #-----------------------------------------------------------------------------
@@ -84,6 +94,8 @@ def create_delay_columns(df):
     # replace null values in days open with 0
     df['days_open'] = df['days_open'].fillna(0)
     # add 1 to resolution days to offset future issues with upcoming feature
+    df['days_open'] = df['days_open'] + 1
+    # add 1 to resolution days to offset future issues with upcoming feature
     df['resolution_days_due'] = df['resolution_days_due'] + 1
     # create new feature to show how long it took to resolve compared to resolution due date
     df['pct_time_of_used'] = df.days_open / df.resolution_days_due
@@ -92,7 +104,7 @@ def create_delay_columns(df):
                             bins = [-20.0,0.5,0.75,1.0,15,800],
                             labels = ['Very Early Response', 
                                       'Early Response', "On Time Response", "Late Response", 
-                                      'Very Late Response'])
+                                      'Very Late Response'], right=False)
     # drop nulls in these columns
     df.dropna(subset=['days_open'], how='all', inplace=True)
     df.dropna(subset=['level_of_delay'], how='all', inplace=True)

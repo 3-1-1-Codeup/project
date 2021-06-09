@@ -597,7 +597,7 @@ def make_source_id_dummies(df):
     df = pd.concat([df, dummy_df], axis=1)
     return df
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def plot_response_by_district(df):
+def plot_response_by_district(train):
     '''This visual shows the number of cases in each level of
     response time in each council district'''
     # Set figure size
@@ -614,7 +614,7 @@ def plot_response_by_district(df):
     # show just the plot
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def plot_response_by_dept(df):
+def plot_response_by_dept(train):
     '''This visual shows the number of cases in each
     level of delay by department'''
     # set figure size
@@ -631,7 +631,7 @@ def plot_response_by_dept(df):
     # just show the visual
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def plot_response_by_reason(df):
+def plot_response_by_reason(train):
     '''This visual shows the number of cases for each delay level
     by the reason for the case being made'''
     # set figure size
@@ -732,3 +732,132 @@ def sa_map(train):
     plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def plot_response_by_district(train):
+    '''This visual shows the number of cases in each level of
+    response time in each council district'''
+    # Set figure size
+    plt.figure(figsize=(16,6))
+    # set title of plot
+    plt.title("Delay Levels Accross Districts", size=20, color='black')
+    # rename x-axis so it isnt level_of_delay
+    plt.xlabel('Level Of Response Time')
+    # rename y-axis so it is not count
+    plt.ylabel('Number of Cases')
+    # create the visual (palette subject to change)
+    sns.countplot(x='level_of_delay', hue='council_district', data=train,
+                   palette='viridis')
+    # show just the plot
+    plt.show()
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def plot_response_by_dept(train):
+    '''This visual shows the number of cases in each
+    level of delay by department'''
+    # set figure size
+    plt.figure(figsize=(16,6))
+    # make the title of the visual
+    plt.title("Delay Levels Accross Departments", size=20, color='black')
+    # rename x-axis so it is not level_of_delay
+    plt.xlabel('Level Of Response Time')
+    # rename y-axis so it is not count
+    plt.ylabel('Number of Cases')
+    # make the visual itself (palette subject to change)
+    sns.countplot(x='level_of_delay', hue='dept', data=train,
+                   palette='viridis_r')
+    # just show the visual
+    plt.show()
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def plot_response_by_reason(train):
+    '''This visual shows the number of cases for each delay level
+    by the reason for the case being made'''
+    # set figure size
+    plt.figure(figsize=(16,6))
+    # set the titke
+    plt.title("Delay Levels Accross Call Reasons", size=20, color='black')
+    # rename x-axis so it is not level_of_delay
+    plt.xlabel('Level of Response Time')
+    # rename y-axis so it is not just count
+    plt.ylabel('Number of Cases')
+    # make the visual (palette subject to change)
+    sns.countplot(x='level_of_delay', hue='call_reason', data=train,
+                   palette='viridis_r')
+    
+    plt.legend(loc='upper right')
+    # just show the visual
+    plt.show() 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def plot_open_vs_resolve(train):
+    '''creates 2 different plots
+    1 plot will reflect level of delay by days open and days till resolution
+    other plot will reflect department by days open and days till resolution'''
+    # set subplot and its size
+    plt.subplots(1, 2, figsize=(40,13), sharey=True)
+    # set grid color
+    sns.set(style="white")
+    # create custom color palette for second plot
+    dept_colors = ['sienna', 'darkgray', 'rebeccapurple',
+                   'red', 'aqua', 'fuchsia', 'orange', 'green', 
+                   'violet']
+    # put first plot in its position for subplotting
+    plt.subplot(1,2,1)
+    # make the title
+    plt.title("Levels of Dealy by Numbers of Days Open by Number of Days to Resolution", size=20, color='black')
+    # name the x axis
+    plt.xlabel('Number of Days the Case was Open')
+    # name the y axis
+    plt.ylabel('Number of Days the Case was Given to be Resolved')
+    # create the plot
+    sns.scatterplot(data=train, x='days_open', y='resolution_days_due', palette='nipy_spectral',
+                    hue='level_of_delay', edgecolor='black')
+    # put second plot in its position within subplot
+    plt.subplot(1,2,2)
+    # set the title
+    plt.title("Departments by Numbers of Days Open by Number of Days to Resolution", size=20, color='black')
+    # set x axis name
+    plt.xlabel('Number of Days the Case was Open')
+    # set y axis name
+    plt.ylabel('Number of Days the Case was Given to be Resolved')
+    # create plot
+    sns.scatterplot(data=train, x='days_open', y='resolution_days_due', palette=dept_colors,
+                    hue='dept', edgecolor='black')
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def plot_source_resolution_days(train):
+    '''plots the level of delays based on the source of the report'''
+    # set figure sizing
+    plt.figure(figsize=(16,6))
+    # make the plot
+    sns.barplot(data=train, x="level_of_delay", y="resolution_days_due", hue='source_id', palette='viridis')
+    # place the legend in desired location
+    plt.legend(loc='upper right')
+    # make the title
+    plt.title("Delay Level vs. Resolution Days Due Based on Reporting System")
+    # make the x label
+    plt.xlabel('Level of Delay')
+    # make the y label
+    plt.ylabel('Number of Days given for a Resolution to be Made')
+    # show just the plot
+    plt.show()
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def plot_dept_resolution_days(train):
+    '''plots the level of delays based on the source of the report'''
+    # set figure sizing
+    plt.figure(figsize=(16,6))
+    # make the plot
+    sns.barplot(data=train, x="level_of_delay", y="resolution_days_due", hue='dept', palette='viridis')
+    # place the legend in desired location
+    plt.legend(loc='upper right')
+    # make the title
+    plt.title("Delay Level vs. Resolution Days Due Based on Department")
+    # make the x label
+    plt.xlabel('Level of Delay')
+    # make the y label
+    plt.ylabel('Number of Days given for a Resolution to be Made')
+    # show just the plot
+    plt.show()
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def avg_days_by_district(train):
+    district_df = create_district_df(train)
+    plt.subplots(figsize=(22, 6))
+    sns.set_theme(style="darkgrid")
+    sns.barplot(data = district_df, x = 'council_district', y = 'days_before_or_after_due', palette = "viridis").set_title('Average Days Before or After Due')
+    plt.xlabel('District')
+    plt.ylabel('Average Response Time')
